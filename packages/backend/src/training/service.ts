@@ -6,4 +6,9 @@ export const trainingService = {
     const rows = await trainingRepository.findAll();
     return rows.map(trainingMapper.toTrainingDetail);
   },
+
+  async findByGroupId(groupId: string) {
+    const rows = await trainingRepository.findByGroupId(groupId);
+    return rows.map(trainingMapper.toTrainingDetail);
+  },
 };

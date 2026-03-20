@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "exports": {
     "./attendance": "./src/attendance/index.ts",
+    "./event-camp": "./src/event-camp/index.ts",
+    "./event-competition": "./src/event-competition/index.ts",
+    "./event-exam": "./src/event-exam/index.ts",
+    "./event": "./src/event/index.ts",
+    "./event-file": "./src/event-file/index.ts",
+    "./event-seminar": "./src/event-seminar/index.ts",
+    "./parent-event": "./src/parent-event/index.ts",
     "./student": "./src/student/index.ts",
     "./parent": "./src/parent/index.ts",
     "./group": "./src/group/index.ts",
