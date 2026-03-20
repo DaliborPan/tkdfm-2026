@@ -2,6 +2,7 @@
   "name": "@repo/backend",
   "version": "1.0.0",
   "exports": {
+    "./attendance": "./src/attendance/index.ts",
     "./student": "./src/student/index.ts",
     "./parent": "./src/parent/index.ts",
     "./group": "./src/group/index.ts",
