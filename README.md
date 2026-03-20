@@ -10,7 +10,7 @@ This turborepo includes the following packages/apps:
 
 - `web`: a [Next.js](https://nextjs.org/) app
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/database`: [Prisma ORM](https://prisma.io/) to manage & access your database — use `import { userSchema, userService } from "@repo/database/user"` (no package root export)
+- `@repo/backend`: [Prisma ORM](https://prisma.io/) to manage & access your database — use `import { userSchema, userService } from "@repo/backend/user"` (no package root export)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
@@ -61,10 +61,10 @@ To change the default database name, update the `POSTGRES_DB` environment variab
 
 ### 3. Setup environment variables
 
-Once the database is ready, copy the `.env.example` file to the [`/packages/database`](./packages/database/) and [`/apps/web`](./apps/web/) directories as `.env`:
+Once the database is ready, copy the `.env.example` file to the [`/packages/backend`](./packages/backend/) and [`/apps/web`](./apps/web/) directories as `.env`:
 
 ```bash
-cp .env.example ./packages/database/.env
+cp .env.example ./packages/backend/.env
 cp .env.example ./apps/web/.env
 ```
 
@@ -100,15 +100,15 @@ bun run db:migrate:dev
 
 You’ll be prompted to name the migration. Once you provide a name, Prisma will create and apply the migration to your database.
 
-> Note: The `db:migrate:dev` script (located in [packages/database/package.json](/packages/database/package.json)) uses [Prisma Migrate](https://www.prisma.io/migrate) under the hood.
+> Note: The `db:migrate:dev` script (located in [packages/backend/package.json](/packages/backend/package.json)) uses [Prisma Migrate](https://www.prisma.io/migrate) under the hood.
 
-For production environments, always push schema changes to your database using the [`prisma migrate deploy` command](https://www.prisma.io/docs/orm/prisma-client/deployment/deploy-database-changes-with-prisma-migrate). You can find an example `db:migrate:deploy` script in the [`package.json` file](/packages/database/package.json) of the `database` package.
+For production environments, always push schema changes to your database using the [`prisma migrate deploy` command](https://www.prisma.io/docs/orm/prisma-client/deployment/deploy-database-changes-with-prisma-migrate). You can find an example `db:migrate:deploy` script in the [`package.json` file](/packages/backend/package.json) of the `backend` package.
 
 ### 5. Seed your database
 
 To populate your database with initial or fake data, use [Prisma's seeding functionality](https://www.prisma.io/docs/guides/database/seed-database).
 
-Update the seed script located at [`packages/database/src/seed.ts`](/packages/database/src/seed.ts) to include any additional data that you want to seed. Once edited, run the seed command:
+Update the seed script located at [`packages/backend/src/seed.ts`](/packages/backend/src/seed.ts) to include any additional data that you want to seed. Once edited, run the seed command:
 
 ```bash
 # Using npm

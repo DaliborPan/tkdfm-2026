@@ -1,5 +1,5 @@
 {
-  "name": "@repo/database",
+  "name": "@repo/backend",
   "version": "1.0.0",
   "exports": {
     "./user": "./src/user/index.ts"

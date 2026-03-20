@@ -1,4 +1,4 @@
-import { userService } from "@repo/database/user";
+import { userService } from "@repo/backend/user";
 import { connection } from "next/server";
 import { Suspense } from "react";
 

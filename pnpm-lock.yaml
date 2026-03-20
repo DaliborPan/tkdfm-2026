@@ -40,9 +40,9 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^16.2.0
         version: 16.2.0
-      '@repo/database':
+      '@repo/backend':
         specifier: workspace:*
-        version: link:../../packages/database
+        version: link:../../packages/backend
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
@@ -65,33 +65,7 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
 
-  packages/config-eslint:
-    devDependencies:
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^7.1.0
-        version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
-      '@typescript-eslint/parser':
-        specifier: ^7.1.0
-        version: 7.18.0(eslint@8.57.1)(typescript@5.5.4)
-      '@vercel/style-guide':
-        specifier: ^5.2.0
-        version: 5.2.0(@next/eslint-plugin-next@14.2.35)(eslint@8.57.1)(prettier@3.7.4)(typescript@5.5.4)
-      eslint-config-prettier:
-        specifier: ^9.1.0
-        version: 9.1.2(eslint@8.57.1)
-      eslint-config-turbo:
-        specifier: ^2.0.0
-        version: 2.7.3(eslint@8.57.1)(turbo@2.8.20)
-      eslint-plugin-only-warn:
-        specifier: ^1.1.0
-        version: 1.1.0
-      typescript:
-        specifier: 5.5.4
-        version: 5.5.4
-
-  packages/config-typescript: {}
-
-  packages/database:
+  packages/backend:
     dependencies:
       '@prisma/client':
         specifier: latest
@@ -136,6 +110,32 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+
+  packages/config-eslint:
+    devDependencies:
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^7.1.0
+        version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+      '@typescript-eslint/parser':
+        specifier: ^7.1.0
+        version: 7.18.0(eslint@8.57.1)(typescript@5.5.4)
+      '@vercel/style-guide':
+        specifier: ^5.2.0
+        version: 5.2.0(@next/eslint-plugin-next@14.2.35)(eslint@8.57.1)(prettier@3.7.4)(typescript@5.5.4)
+      eslint-config-prettier:
+        specifier: ^9.1.0
+        version: 9.1.2(eslint@8.57.1)
+      eslint-config-turbo:
+        specifier: ^2.0.0
+        version: 2.7.3(eslint@8.57.1)(turbo@2.8.20)
+      eslint-plugin-only-warn:
+        specifier: ^1.1.0
+        version: 1.1.0
+      typescript:
+        specifier: 5.5.4
+        version: 5.5.4
+
+  packages/config-typescript: {}
 
 packages:
 
@@ -1974,10 +1974,12 @@ packages:
 
   glob@10.5.0:
     resolution: {integrity: sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   globals@13.24.0:
     resolution: {integrity: sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==}
@@ -2773,6 +2775,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@5.0.10:

@@ -2,7 +2,7 @@
   "name": "tkdfm-2026",
   "private": true,
   "prisma": {
-    "schema": "packages/database/prisma/schema.prisma"
+    "schema": "packages/backend/prisma/schema.prisma"
   },
   "scripts": {
     "build": "turbo run build",
