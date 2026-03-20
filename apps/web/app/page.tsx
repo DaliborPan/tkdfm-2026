@@ -1,10 +1,10 @@
-import { prisma } from "@repo/database";
-
+import { userService } from "@repo/database/user";
+import { connection } from "next/server";
 import { Suspense } from "react";
 
 const getUsers = async () => {
-  const users = await prisma.user.findMany();
-  return users;
+  await connection();
+  return userService.findAll();
 };
 
 const Users = async () => {
