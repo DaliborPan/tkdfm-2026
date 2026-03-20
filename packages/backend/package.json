@@ -4,7 +4,8 @@
   "exports": {
     "./student": "./src/student/index.ts",
     "./parent": "./src/parent/index.ts",
-    "./group": "./src/group/index.ts"
+    "./group": "./src/group/index.ts",
+    "./training": "./src/training/index.ts"
   },
   "scripts": {
     "db:push": "prisma db push",
