@@ -1,19 +1,19 @@
-import { userService } from "@repo/backend/user";
+import { studentService } from "@repo/backend/student";
 import { connection } from "next/server";
 import { Suspense } from "react";
 
-const getUsers = async () => {
+const getStudents = async () => {
   await connection();
-  return userService.findAll();
+  return studentService.findAll();
 };
 
-const Users = async () => {
-  const users = await getUsers();
+const Students = async () => {
+  const students = await getStudents();
 
   return (
     <div>
-      <h1>Users</h1>
-      <pre>{JSON.stringify(users, null, 2)}</pre>
+      <h1>Students</h1>
+      <pre>{JSON.stringify(students, null, 2)}</pre>
     </div>
   );
 };
@@ -21,7 +21,7 @@ const Users = async () => {
 export default async function IndexPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Users />
+      <Students />
     </Suspense>
   );
 }

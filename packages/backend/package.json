@@ -2,7 +2,8 @@
   "name": "@repo/backend",
   "version": "1.0.0",
   "exports": {
-    "./user": "./src/user/index.ts"
+    "./student": "./src/student/index.ts",
+    "./parent": "./src/parent/index.ts"
   },
   "scripts": {
     "db:push": "prisma db push",
@@ -14,8 +15,8 @@
     "studio": "prisma studio"
   },
   "dependencies": {
-    "@prisma/client": "latest",
-    "@prisma/client-runtime-utils": "7.2.0",
+    "@prisma/client": "7.5.0",
+    "@prisma/client-runtime-utils": "7.5.0",
     "dotenv": "^17.2.3",
     "pg": "^8.16.3",
     "zod": "^3.24.2"
@@ -23,9 +24,9 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/pg": "^8.16.0",
+    "@types/pg": "8.11.11",
     "eslint": "^8.57.0",
-    "prisma": "latest",
+    "prisma": "7.5.0",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
     "tsx": "4.21.0",

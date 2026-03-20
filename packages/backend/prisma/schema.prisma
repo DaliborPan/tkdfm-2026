@@ -7,12 +7,351 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output = "../generated/client"
+  output   = "../generated/client"
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
+model Student {
+  id                  String         @id @default(uuid())
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @default(now()) @updatedAt
+  inactive            String         @default("9999-01-01")
+  importActive        String         @default("active")
+  tkdid               String         @unique()
+  firstName           String         @default("")
+  lastName            String         @default("")
+  technicalGrade      String         @default("10. kup")
+  technicalGradeStart String         @default("")
+  attendances         Attendance[]
+  parent              Parent?
+  studentGroups       StudentGroup[]
+}
+
+model Trainer {
+  id         String @id @default(uuid())
+  name       String
+  email      String @unique()
+  nationalId String @unique()
+
+  // trainedTrainings     TrainerOnTraining[]
+}
+
+model Parent {
+  id                String           @id @default(uuid())
+  role              String           @default("PARENT")
+  nationalId        String           @unique()
+  birthDate         String           @default("")
+  phoneNumber       String           @default("")
+  email             String           @default("")
+  street            String           @default("")
+  streetNumber      String           @default("")
+  city              String           @default("")
+  registered        String           @default("")
+  weight            Int?
+  height            Int?
+  disability        String           @default("")
+  gender            String           @default("male")
+  mskGroup          String           @default("")
+  nsaGroup          String           @default("")
+  student           Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId         String           @unique
+  firstHalfPayment  Payment?         @relation(name: "firstHalfPayment")
+  secondHalfPayment Payment?         @relation(name: "secondHalfPayment")
+  teamPayment       Payment?         @relation(name: "teamPayment")
+  parentEvents      ParentEvent[]
+  helpdeskTickets   HelpdeskTicket[]
+}
+
+model Payment {
+  id                 String                  @id @default(uuid())
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @default(now()) @updatedAt
+  internalNote       String                  @default("")
+  displayNote        String                  @default("")
+  parentFirstHalfId  String?                 @unique
+  parentFirstHalf    Parent?                 @relation(fields: [parentFirstHalfId], references: [id], onDelete: Cascade, name: "firstHalfPayment")
+  parentSecondHalfId String?                 @unique
+  parentSecondHalf   Parent?                 @relation(fields: [parentSecondHalfId], references: [id], onDelete: Cascade, name: "secondHalfPayment")
+  parentTeamId       String?                 @unique
+  parentTeam         Parent?                 @relation(fields: [parentTeamId], references: [id], onDelete: Cascade, name: "teamPayment")
+  parentEventId      String?                 @unique
+  parentEvent        ParentEvent?            @relation(fields: [parentEventId], references: [id], onDelete: Cascade)
+  pendingPayments    PendingPaymentPayment[]
+}
+
+// ----- Group -----
+
+model Group {
+  id                    String                 @id @default(uuid())
+  createdAt             DateTime               @default(now())
+  name                  String
+  shortcut              String
+  location              String                 @default("")
+  color                 String                 @default("")
+  studentGroups         StudentGroup[]
+  groupRegularTrainings GroupRegularTraining[]
+  trainings             Training[]
+}
+
+model GroupRegularTraining {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  dayOfWeek String
+
+  // time e.g. 10:00
+  startsAt String
+  endsAt   String
+  note     String @default("")
+  groupId  String
+  group    Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+}
+
+model StudentGroup {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  groupId   String
+  group     Group    @relation(fields: [groupId], references: [id])
+
+  @@index([studentId])
+  @@index([groupId])
+}
+
+// ----- Events -----
+
+model Event {
+  id          String            @id @default(cuid())
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @default(now()) @updatedAt
+  title       String
+  startsAt    DateTime
+  endsAt      DateTime
+  location    String            @default("")
+  deadline    DateTime?
+  info        String            @db.Text
+  type        String
+  seminar     EventSeminar?
+  competition EventCompetition?
+  camp        EventCamp?
+  exam        EventExam?
+  files       EventFile[]
+  parents     ParentEvent[]
+}
+
+model EventFile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  name      String
+  url       String
+  displayed Boolean  @default(true)
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model EventSeminar {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+  master       String   @default("")
+  whoCanAttend String   @default("")
+  eventId      String   @unique
+  event        Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model EventCompetition {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+  accomodation   String   @default("")
+  travel         String   @default("")
+  food           String   @default("")
+  price          String   @default("")
+  paymentInfo    String   @db.Text
+  variableSymbol String
+  eventId        String   @unique
+  event          Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model EventCamp {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+  price          String   @default("")
+  paymentInfo    String   @db.Text
+  variableSymbol String
+  eventId        String   @unique
+  event          Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model EventExam {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+  examiner       String   @default("")
+  paymentInfo    String   @db.Text
+  variableSymbol String
+  eventId        String   @unique
+  event          Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model ParentEvent {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  // In case of COMPETITION event type
+  weight Int?
+  height Int?
+
+  // Text for internal notes about the participation
+  internalNote String @default("")
+
+  // Text shown for the parent
+  parentNote String @default("")
+
+  // Text regarding cancellation of the participation
+  cancelled String @default("")
+
+  // ParentEvent can be created either by ADMIN or PARENT
+  createdBy String @default("PARENT")
+  parentId  String
+  parent    Parent @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  eventId   String
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  // paymentId      String?    @unique
+  // payment        Payment?   @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+  payment Payment?
+
+  @@index([parentId])
+  @@index([eventId])
+}
+
+// ----- Training -----
+
+model Training {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  startsAt  DateTime
+  endsAt    DateTime
+  cancelled String   @default("")
+
+  // Generated or created as custom
+  regular Boolean @default(true)
+  groupId String
+  group   Group   @relation(fields: [groupId], references: [id])
+
+  // trainers      TrainerOnTraining[]
+  attendances Attendance[]
+
+  @@index([groupId])
+}
+
+// ----- Attendance -----
+
+model Attendance {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // If the student was excused from the training
+  excused    Boolean  @default(false)
+  studentId  String
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  trainingId String
+  training   Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([trainingId])
+}
+
+model PendingPayment {
+  id                   String                  @id @default(cuid())
+  createdAt            DateTime                @default(now())
+  messageId            String                  @unique
+  message              String                  @default("")
+  plainText            String                  @db.Text
+  amount               String                  @default("")
+  variableSymbol       String                  @default("")
+  connectedPaymentType String                  @default("")
+  processed            Boolean                 @default(false)
+  internalNote         String                  @default("")
+  payments             PendingPaymentPayment[]
+}
+
+model PendingPaymentPayment {
+  id               String          @id @default(cuid())
+  createdAt        DateTime        @default(now())
+  paymentId        String?
+  payment          Payment?        @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  pendingPaymentId String?
+  pendingPayment   PendingPayment? @relation(fields: [pendingPaymentId], references: [id], onDelete: Cascade)
+
+  @@index([pendingPaymentId])
+  @@index([paymentId])
+}
+
+model LatestPendingPayment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  messageId String
+}
+
+model Widget {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  text      String   @db.Text
+}
+
+model HelpdeskTicket {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  text      String   @db.Text
+  status    String   @default("NEW")
+  parentId  String?
+  parent    Parent?  @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  @@index([parentId])
+}
+
+model StudentCandidate {
+  id                  String   @id @default(cuid())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @default(now()) @updatedAt
+  tkdid               String   @unique
+  firstName           String
+  lastName            String
+  gender              String
+  nationalId          String   @unique
+  birthDate           String   @default("")
+  street              String   @default("")
+  streetNumber        String   @default("")
+  city                String   @default("")
+  phoneNumber         String   @default("")
+  email               String   @default("")
+  registered          String   @default("")
+  technicalGrade      String   @default("10. kup")
+  technicalGradeStart String   @default("")
+  active              String   @default("active")
+  deleted             String   @default("")
+}
+
+model TkdPortalLog {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  nationalId String   @default("")
+  firstName  String   @default("")
+  lastName   String   @default("")
+  type       String   @default("CREATE")
+  field      String   @default("")
+  oldValue   String   @default("")
+  newValue   String   @default("")
+  note       String   @default("")
 }
