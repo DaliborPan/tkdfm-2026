@@ -9,8 +9,12 @@
     "./event": "./src/event/index.ts",
     "./event-file": "./src/event-file/index.ts",
     "./event-seminar": "./src/event-seminar/index.ts",
+    "./group-regular-training": "./src/group-regular-training/index.ts",
+    "./helpdesk-ticket": "./src/helpdesk-ticket/index.ts",
     "./parent-event": "./src/parent-event/index.ts",
     "./student": "./src/student/index.ts",
+    "./student-candidate": "./src/student-candidate/index.ts",
+    "./student-group": "./src/student-group/index.ts",
     "./parent": "./src/parent/index.ts",
     "./group": "./src/group/index.ts",
     "./training": "./src/training/index.ts"
