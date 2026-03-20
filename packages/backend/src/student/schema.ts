@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { parentDetailSchema } from "../parent";
+import { parentDetailSchema } from "../parent/schema";
 
 export const studentDetailSchema = z.object({
   id: z.string(),
@@ -10,8 +10,8 @@ export const studentDetailSchema = z.object({
   technicalGradeStart: z.string(),
   inactive: z.string(),
   importActive: z.string(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
   parent: parentDetailSchema.nullable(),
 });
 

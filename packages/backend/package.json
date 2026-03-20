@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "exports": {
     "./student": "./src/student/index.ts",
-    "./parent": "./src/parent/index.ts"
+    "./parent": "./src/parent/index.ts",
+    "./group": "./src/group/index.ts"
   },
   "scripts": {
     "db:push": "prisma db push",

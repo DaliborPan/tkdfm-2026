@@ -1,8 +1,8 @@
 import type { Parent } from "../../generated/client";
-import { parentDetailSchema, type ParentDetailType } from "./schema";
+import { parentDetailSchema } from "./schema";
 
 export const parentMapper = {
-  toParentDetail(parent: Parent): ParentDetailType {
+  toParentDetail(parent: Parent) {
     return parentDetailSchema.parse({
       id: parent.id,
       role: parent.role,
