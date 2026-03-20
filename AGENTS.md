@@ -14,3 +14,8 @@
 
 - Do not export mappers from package module entrypoints.
 - Export only service and schema public API from backend modules unless explicitly requested otherwise.
+
+## Repository Methods
+
+- When adding a new backend module, add only `findAll()` by default.
+- Add other repository and service query methods only when explicitly requested.
