@@ -1,5 +1,21 @@
 "use client";
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import { authClient } from "../../lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -40,45 +56,65 @@ export default function SignInPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-6 py-12">
-      <div className="w-full max-w-md rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h1 className="text-2xl font-semibold text-slate-900">
-          Prihlaseni trenera
-        </h1>
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-muted/40 px-6 py-12 sm:px-8 lg:px-12">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,theme(colors.white),transparent_45%)]" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent" />
 
-        <p className="mt-3 mb-6 text-sm leading-6 text-slate-600">
-          Zadej rodne cislo. Pokud odpovida existujicimu trenerovi, vytvori se
-          session a budes prihlasen.
-        </p>
+      <Card className="relative z-10 w-full max-w-lg rounded-2xl border border-border/70 bg-background/95 shadow-xl shadow-black/5 backdrop-blur">
+        <CardHeader className="gap-4 px-8 pt-8 sm:px-10 sm:pt-10">
+          <div className="w-fit rounded-full border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+            TKDFM 2026
+          </div>
+          <CardTitle className="text-3xl tracking-tight">
+            Prihlaseni trenera
+          </CardTitle>
+          <CardDescription className="max-w-md text-[15px] leading-6">
+            Zadej rodne cislo. Pokud odpovida existujicimu trenerovi, vytvori se
+            session a budes prihlasen.
+          </CardDescription>
+        </CardHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <label className="grid gap-2 text-sm font-medium text-slate-900">
-            Rodne cislo
-            <input
-              autoComplete="off"
+        <CardContent className="px-8 pb-8 sm:px-10 sm:pb-10">
+          <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+            <FieldGroup>
+              <Field data-invalid={error ? true : undefined}>
+                <FieldLabel htmlFor="nationalId">Rodne cislo</FieldLabel>
+                <Input
+                  aria-invalid={error ? true : undefined}
+                  autoComplete="off"
+                  autoFocus
+                  disabled={isPending}
+                  id="nationalId"
+                  inputMode="numeric"
+                  name="nationalId"
+                  onChange={(event) => setNationalId(event.target.value)}
+                  placeholder="napr. 010101/1234"
+                  value={nationalId}
+                  className="h-11 px-4 text-sm"
+                />
+                <FieldDescription>
+                  Pouzij stejne rodne cislo, ktere je evidovane u trenera.
+                </FieldDescription>
+              </Field>
+            </FieldGroup>
+
+            {error ? (
+              <Alert variant="destructive">
+                <AlertTitle>Prihlaseni se nezdarilo</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            ) : null}
+
+            <Button
+              className="h-11 w-full text-sm"
               disabled={isPending}
-              inputMode="numeric"
-              name="nationalId"
-              onChange={(event) => setNationalId(event.target.value)}
-              placeholder="napr. 010101/1234"
-              value={nationalId}
-              className="w-full rounded-lg border border-slate-300 px-4 py-3 text-base outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:bg-slate-100"
-            />
-          </label>
-
-          {error ? (
-            <p className="text-sm leading-6 text-red-700">{error}</p>
-          ) : null}
-
-          <button
-            disabled={isPending}
-            type="submit"
-            className="w-full rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-progress disabled:bg-slate-500"
-          >
-            {isPending ? "Prihlasuji..." : "Prihlasit"}
-          </button>
-        </form>
-      </div>
+              type="submit"
+            >
+              {isPending ? "Prihlasuji..." : "Prihlasit"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </main>
   );
 }
