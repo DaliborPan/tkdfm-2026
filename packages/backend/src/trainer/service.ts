@@ -6,4 +6,9 @@ export const trainerService = {
     const rows = await trainerRepository.findAll();
     return rows.map(trainerMapper.toTrainerDetail);
   },
+
+  async findByNationalId(nationalId: string) {
+    const row = await trainerRepository.findByNationalId(nationalId);
+    return row ? trainerMapper.toTrainerDetail(row) : null;
+  },
 };

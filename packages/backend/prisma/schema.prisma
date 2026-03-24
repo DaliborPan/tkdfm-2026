@@ -31,8 +31,69 @@ model Trainer {
   name       String
   email      String @unique()
   nationalId String @unique()
+  user       User?
 
   // trainedTrainings     TrainerOnTraining[]
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique()
+  emailVerified Boolean   @default(false)
+  image         String?
+  trainerId     String    @unique()
+  role          String    @default("TRAINER")
+  trainer       Trainer   @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  sessions      Session[]
+  accounts      Account[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique()
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([userId])
+}
+
+model Account {
+  id                    String    @id
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now()) @updatedAt
+
+  @@index([userId])
+  @@unique([providerId, accountId])
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@index([identifier])
 }
 
 model Parent {

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "exports": {
     "./attendance": "./src/attendance/index.ts",
+    "./auth": "./src/auth/index.ts",
     "./event-camp": "./src/event-camp/index.ts",
     "./event-competition": "./src/event-competition/index.ts",
     "./event-exam": "./src/event-exam/index.ts",
@@ -36,8 +37,10 @@
     "studio": "prisma studio"
   },
   "dependencies": {
+    "@better-auth/prisma-adapter": "^1.5.6",
     "@prisma/client": "7.5.0",
     "@prisma/client-runtime-utils": "7.5.0",
+    "better-auth": "^1.5.6",
     "dotenv": "^17.2.3",
     "pg": "^8.16.3",
     "zod": "^3.24.2"
