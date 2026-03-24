@@ -1,6 +1,5 @@
 import { getMeOrNull } from "../../lib/get-me";
 import { redirect } from "next/navigation";
-import { connection } from "next/server";
 
 import { Suspense } from "react";
 
