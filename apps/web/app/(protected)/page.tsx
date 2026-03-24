@@ -3,8 +3,6 @@ import { getMe } from "../../lib/get-me";
 import { LogoutButton } from "./logout-button";
 
 export default function IndexPage() {
-  const a = 1;
-
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-6 px-6 py-10">
       <div className="flex items-start justify-between gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
