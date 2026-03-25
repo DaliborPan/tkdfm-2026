@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import { getMe } from "../../lib/get-me";
 import { LogoutButton } from "./logout-button";
 

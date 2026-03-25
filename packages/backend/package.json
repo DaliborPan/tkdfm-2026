@@ -32,6 +32,7 @@
     "format": "prisma format",
     "generate": "prisma generate",
     "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
     "prebuild": "npm run generate",
     "predev": "npm run generate",
     "studio": "prisma studio"
@@ -49,7 +50,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/pg": "8.11.11",
-    "eslint": "^8.57.0",
+    "eslint": "^9.37.0",
     "prisma": "7.5.0",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",

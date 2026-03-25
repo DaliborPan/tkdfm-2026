@@ -1,5 +1,6 @@
-import { auth } from "@repo/backend/auth";
 import { headers } from "next/headers";
+
+import { auth } from "@repo/backend/auth";
 
 export const getMeOrNull = async () => {
   const session = await auth.api.getSession({

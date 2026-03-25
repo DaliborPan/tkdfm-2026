@@ -1,5 +1,6 @@
-import { prismaAdapter } from "better-auth/adapters/prisma";
 import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+
 import { prisma } from "../client";
 import { trainerNationalIdPlugin } from "./trainer-national-id-plugin";
 
