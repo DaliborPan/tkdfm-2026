@@ -1,3 +1,5 @@
+import { Button } from "iqf-web-ui/button";
+
 import { getMe } from "../../../lib/get-me";
 import { LogoutButton } from "./logout-button";
 
@@ -16,6 +18,8 @@ export default async function IndexPage() {
         </div>
 
         <LogoutButton />
+
+        <Button>abcd</Button>
       </div>
     </main>
   );

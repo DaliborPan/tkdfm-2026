@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  type ComponentProps,
-  type PropsWithChildren,
-  Suspense,
-  useMemo,
-} from "react";
+import { type PropsWithChildren, Suspense, useMemo } from "react";
 
 import Link from "next/link";
 import {
@@ -25,7 +20,7 @@ import { IqfAxiosError, type IqfAxiosErrorHandler } from "iqf-web-ui/api-fetch";
 import { SettingsProvider } from "iqf-web-ui/settings";
 import { Toaster, errorToast } from "iqf-web-ui/toast";
 import { setZodErrorMap } from "iqf-web-ui/utils";
-import { IntlProvider, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 const DEFAULT_ERROR_MESSAGE = "Chyba při komunikaci se serverem.";
 
@@ -80,8 +75,6 @@ const queryClient = new QueryClient({
 });
 
 type ProviderProps = PropsWithChildren<{
-  messages: ComponentProps<typeof IntlProvider>["messages"];
-  locale: string;
   router?: ReturnType<typeof useRouter>;
   pathname?: ReturnType<typeof usePathname>;
   searchParams?: URLSearchParams;
@@ -123,43 +116,37 @@ export function Providers({
   router,
   pathname,
   searchParams,
-  locale,
-  messages,
 }: ProviderProps) {
   if (!router || !pathname || !searchParams) {
     return (
       <Suspense fallback={null}>
-        <ProvidersDynamic locale={locale} messages={messages}>
-          {children}
-        </ProvidersDynamic>
+        <ProvidersDynamic>{children}</ProvidersDynamic>
       </Suspense>
     );
   }
 
   return (
     <QueryClientProvider client={queryClient}>
-      <IntlProvider messages={messages} onError={() => void 0} locale={locale}>
-        <ZodLocale />
+      <ZodLocale />
 
-        <SettingsProvider
-          enableSyncPreferences={false}
-          router={{
-            navigate: (href) => {
-              if (href) {
-                router.push(href);
-              }
-            },
-            pathname,
-            useParams,
-            searchParams,
-            Link: (props) => <Link {...props} />,
-          }}
-        >
-          {children}
+      <SettingsProvider
+        enableSyncPreferences={false}
+        router={{
+          navigate: (href) => {
+            if (href) {
+              router.push(href);
+            }
+          },
+          pathname,
+          useParams,
+          searchParams,
+          Link: (props) => <Link {...props} />,
+        }}
+      >
+        {children}
 
-          <Toaster />
-        </SettingsProvider>
-      </IntlProvider>
+        <Toaster />
+      </SettingsProvider>
     </QueryClientProvider>
   );
 }
