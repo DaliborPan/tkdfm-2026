@@ -18,7 +18,7 @@ export const generateStaticParams = () => {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="cs" className={cn("", geist.variable)}>
-      <body className="flex min-h-screen flex-col bg-white font-sans">
+      <body className="flex h-screen flex-col max-h-screen bg-white font-sans">
         {children}
       </body>
     </html>
