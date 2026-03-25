@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { redirect } from "next/navigation";
 
-import { getMeOrNull } from "../../lib/get-me";
+import { getMeOrNull } from "../../../lib/get-me";
 
 async function ProtectedLayoutAsync({
   children,

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { getMe } from "../../lib/get-me";
+import { getMe } from "../../../lib/get-me";
 import { LogoutButton } from "./logout-button";
 
 export default function IndexPage() {

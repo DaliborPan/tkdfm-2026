@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
-import { authClient } from "../../lib/auth-client";
+import { authClient } from "../../../lib/auth-client";
 
 export default function SignInPage() {
   const router = useRouter();

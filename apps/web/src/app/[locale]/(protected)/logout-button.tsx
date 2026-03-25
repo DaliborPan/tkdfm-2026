@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { authClient } from "../../lib/auth-client";
+import { authClient } from "../../../lib/auth-client";
 
 export const LogoutButton = () => {
   const router = useRouter();
