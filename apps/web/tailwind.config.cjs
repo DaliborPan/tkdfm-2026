@@ -1,4 +1,6 @@
-const config = require("iqf-web-tailwind/tailwind.config.js");
+/* global module, require */
+/* eslint-disable @typescript-eslint/no-require-imports */
+const config = require("iqf-web-tailwind/tailwind.config.cjs");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
