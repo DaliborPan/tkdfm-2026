@@ -29,7 +29,7 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 packages/database/.env
-apps/web/.env
+apps/backoffice/.env
 #!packages/database/.env
 
 # turbo

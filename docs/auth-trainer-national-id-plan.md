@@ -49,11 +49,11 @@ Zavest custom autentizaci s Better Auth tak, aby se trener prihlasoval pouze pre
 
 ### Web
 
-- Do `apps/web` pridat Better Auth klienta.
-- Vytvorit route handler `apps/web/app/api/auth/[...all]/route.ts`.
-- Vytvorit `apps/web/app/sign-in/page.tsx` s jednim inputem pro rodne cislo.
+- Do `apps/backoffice` pridat Better Auth klienta.
+- Vytvorit route handler `apps/backoffice/app/api/auth/[...all]/route.ts`.
+- Vytvorit `apps/backoffice/app/sign-in/page.tsx` s jednim inputem pro rodne cislo.
 - Formular bude volat custom auth endpoint a po uspechu presmeruje na `/`.
-- `apps/web/app/page.tsx` bude chranena stranka s kontrolou pres `auth.api.getSession({ headers: await headers() })`.
+- `apps/backoffice/app/page.tsx` bude chranena stranka s kontrolou pres `auth.api.getSession({ headers: await headers() })`.
 
 ## Normalizace rodneho cisla
 
@@ -83,11 +83,11 @@ Zavest custom autentizaci s Better Auth tak, aby se trener prihlasoval pouze pre
 - `packages/backend/src/trainer/index.ts`
 - `packages/backend/src/auth/index.ts`
 - `packages/backend/src/auth/trainer-national-id-plugin.ts`
-- `apps/web/package.json`
-- `apps/web/lib/auth-client.ts`
-- `apps/web/app/api/auth/[...all]/route.ts`
-- `apps/web/app/sign-in/page.tsx`
-- `apps/web/app/page.tsx`
+- `apps/backoffice/package.json`
+- `apps/backoffice/lib/auth-client.ts`
+- `apps/backoffice/app/api/auth/[...all]/route.ts`
+- `apps/backoffice/app/sign-in/page.tsx`
+- `apps/backoffice/app/page.tsx`
 
 ## Overeni po implementaci
 
