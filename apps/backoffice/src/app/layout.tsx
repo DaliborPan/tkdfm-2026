@@ -15,9 +15,7 @@ export const generateStaticParams = () => {
   return [{ locale: "cs" }];
 };
 
-export default async function RootLayout({
-  children,
-}: LayoutProps<"/[locale]">) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="cs" className={cn("", geist.variable)}>
       <body className="flex min-h-screen flex-col bg-white font-sans">
