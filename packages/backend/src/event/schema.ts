@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { eventCampDetailSchema } from "../event-camp/schema";
 import { eventCompetitionDetailSchema } from "../event-competition/schema";
 import { eventExamDetailSchema } from "../event-exam/schema";

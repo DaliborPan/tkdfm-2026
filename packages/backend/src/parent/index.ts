@@ -1,2 +1,1 @@
-export { parentDetailSchema } from "./schema";
-export type { ParentDetailType } from "./schema";
+export { parentDetailSchema, type ParentDetailType } from "./schema";

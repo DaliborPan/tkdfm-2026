@@ -1,7 +1,8 @@
 import type { BetterAuthPlugin } from "better-auth";
-import { createAuthEndpoint, APIError } from "better-auth/api";
+import { APIError, createAuthEndpoint } from "better-auth/api";
 import { setSessionCookie } from "better-auth/cookies";
 import { z } from "zod";
+
 import { trainerService } from "../trainer";
 import { normalizeNationalId } from "../trainer/national-id";
 

@@ -1,7 +1,8 @@
-import { getMeOrNull } from "../../lib/get-me";
+import { Suspense } from "react";
+
 import { redirect } from "next/navigation";
 
-import { Suspense } from "react";
+import { getMeOrNull } from "../../lib/get-me";
 
 async function ProtectedLayoutAsync({
   children,

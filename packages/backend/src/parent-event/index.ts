@@ -1,3 +1,2 @@
-export { parentEventDetailSchema } from "./schema";
-export type { ParentEventDetailType } from "./schema";
+export { parentEventDetailSchema, type ParentEventDetailType } from "./schema";
 export { parentEventService } from "./service";

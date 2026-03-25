@@ -1,4 +1,5 @@
 import { createAuthClient } from "better-auth/react";
+
 import { trainerNationalIdClientPlugin } from "./trainer-national-id-client";
 
 const createClient = () =>

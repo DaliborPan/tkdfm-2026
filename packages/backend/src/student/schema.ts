@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { parentDetailSchema } from "../parent/schema";
 
 export const studentDetailSchema = z.object({

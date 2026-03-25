@@ -1,3 +1,2 @@
-export { eventDetailSchema } from "./schema";
-export type { EventDetailType } from "./schema";
+export { eventDetailSchema, type EventDetailType } from "./schema";
 export { eventService } from "./service";
