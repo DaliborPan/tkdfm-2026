@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { getMe } from "../../../lib/get-me";
 import { LogoutButton } from "./logout-button";
 
@@ -12,11 +10,9 @@ export default async function IndexPage() {
         <div>
           <h1 className="text-2xl font-semibold text-slate-900">Dashboard</h1>
 
-          <Suspense>
-            <p className="mt-2 text-sm text-slate-600">
-              Prihlasen jako {me.name} ({me.email})
-            </p>
-          </Suspense>
+          <p className="mt-2 text-sm text-slate-600">
+            Prihlasen jako {me.name} ({me.email})
+          </p>
         </div>
 
         <LogoutButton />
