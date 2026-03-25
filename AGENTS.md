@@ -19,3 +19,8 @@
 
 - When adding a new backend module, add only `findAll()` by default.
 - Add other repository and service query methods only when explicitly requested.
+
+## iqf-web Packages
+
+- Do not modify `iqf-web-*` packages in this repository unless the user explicitly requests it.
+- Treat `iqf-web-*` packages as imported upstream code; adapt local apps/packages around them instead of changing them.

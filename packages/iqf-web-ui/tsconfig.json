@@ -1,0 +1,5 @@
+{
+  "extends": "iqf-web-typescript/react-library.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}

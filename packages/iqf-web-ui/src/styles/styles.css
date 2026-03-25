@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/** Fonts */
+
+body {
+  color: var(--iqf-color-neutral-950);
+  font-family: "Roboto", sans-serif;
+}
+
+/* Colors */
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --iqf-color-primary-50: #f3f7fc;
+    --iqf-color-primary-100: #e5eef9;
+    --iqf-color-primary-200: #c5dbf2;
+    --iqf-color-primary-300: #93bde6;
+    --iqf-color-primary-400: #599bd7;
+    --iqf-color-primary-500: #337fc4;
+    --iqf-color-primary-600: #2362a2;
+    --iqf-color-primary-700: #1e5086;
+    --iqf-color-primary-800: #1d456f;
+    --iqf-color-primary-900: #1d3c5d;
+    --iqf-color-primary-950: #13263e;
+    --iqf-color-primary: var(--iqf-color-primary-600);
+
+    /* Secondary Colors -- NOTE: secondary color should be changed to orange according to gov design 4.2 */
+    --iqf-color-secondary-100: #fcfcfc;
+    --iqf-color-secondary-200: #fafafa;
+    --iqf-color-secondary-300: #f5f5f5;
+    --iqf-color-secondary-400: #eaeaea;
+    --iqf-color-secondary-500: #ddd;
+    --iqf-color-secondary-600: #a8a8a8;
+    --iqf-color-secondary-700: #686868;
+    --iqf-color-secondary-800: #3b3b3b;
+    --iqf-color-secondary-900: #232323;
+    --iqf-color-secondary: var(--iqf-color-secondary-800);
+
+    /* Success Colors */
+    --iqf-color-success-50: #f3faf3;
+    --iqf-color-success-100: #e2f6e3;
+    --iqf-color-success-200: #c7ebc9;
+    --iqf-color-success-300: #9bda9e;
+    --iqf-color-success-400: #67c16b;
+    --iqf-color-success-500: #42a547;
+    --iqf-color-success-600: #2e7d32;
+    --iqf-color-success-700: #2a6b2d;
+    --iqf-color-success-800: #265529;
+    --iqf-color-success-900: #204724;
+    --iqf-color-success-950: #0d260f;
+    --iqf-color-success: var(--iqf-color-success-600);
+
+    /* Warning Colors */
+    --iqf-color-warning-100: #fef9ef;
+    --iqf-color-warning-200: #faecc8;
+    --iqf-color-warning-300: #fad47b;
+    --iqf-color-warning-400: #f9c13c;
+    --iqf-color-warning-500: #c78300;
+    --iqf-color-warning-600: #99620f;
+    --iqf-color-warning-700: #865102;
+    --iqf-color-warning: var(--iqf-color-warning-600);
+
+    /* Error Colors */
+    --iqf-color-error-50: #fef2f2;
+    --iqf-color-error-100: #fde3e3;
+    --iqf-color-error-200: #fccccc;
+    --iqf-color-error-300: #f8a9a9;
+    --iqf-color-error-400: #f37676;
+    --iqf-color-error-500: #e84b4b;
+    --iqf-color-error-600: #c62828;
+    --iqf-color-error-700: #b32222;
+    --iqf-color-error-800: #7e1414;
+    --iqf-color-error-900: #490c0c;
+    --iqf-color-error-950: #300606;
+    --iqf-color-error: var(--iqf-color-error-600);
+
+    /* Neutral Colors */
+    --iqf-color-neutral-50: #f6f6f6;
+    --iqf-color-neutral-100: #e7e7e7;
+    --iqf-color-neutral-200: #d1d1d1;
+    --iqf-color-neutral-300: #b0b0b0;
+    --iqf-color-neutral-400: #888888;
+    --iqf-color-neutral-500: #6d6d6d;
+    --iqf-color-neutral-600: #5d5d5d;
+    --iqf-color-neutral-700: #4f4f4f;
+    --iqf-color-neutral-800: #454545;
+    --iqf-color-neutral-900: #3b3b3b;
+    --iqf-color-neutral-950: #262626;
+    --iqf-color-neutral: var(--iqf-color-neutral-600);
+
+    /* Focus Colors */
+    --iqf-color-focus-base: #007bff;
+
+    /** Primary color foreground */
+    --iqf-color-primary-foreground: #ffffff;
+  }
+}
+
+/** Font size classes */
+
+.iqf-text--xs {
+  @apply text-xs;
+}
+.iqf-text--s {
+  @apply text-sm;
+}
+
+.iqf-text--m {
+  @apply text-base;
+}
+
+.iqf-text--l {
+  @apply text-lg;
+}
+
+.iqf-text--xl {
+  @apply text-xl;
+}
+
+.iqf-text--2xl {
+  @apply text-2xl;
+}
+
+.iqf-text--3xl {
+  @apply text-3xl;
+}
+
+.iqf-text--4xl {
+  @apply text-4xl;
+}
+
+.iqf-text--5xl {
+  @apply text-5xl;
+}
+
+.iqf-text--6xl {
+  @apply text-6xl;
+}
+
+/** Modal classes -- TODO: check if still relevant */
+
+.iqf-modal .gov-modal__header {
+  @apply items-center;
+  @apply gap-0;
+  @apply px-4;
+  @apply border-0;
+}
+
+.iqf-modal .gov-modal__inner {
+  @apply gap-4;
+  @apply py-3;
+}
+
+.iqf-modal .gov-modal__footer {
+  @apply border-0;
+  @apply px-4;
+}
+
+.iqf-modal .gov-modal__title {
+  @apply text-2xl;
+}
+
+.iqf-modal.modal-no-header .gov-modal__header {
+  @apply hidden;
+}
+
+.iqf-modal.modal-no-close .gov-modal__close {
+  @apply hidden;
+}
+
+div[aria-describedby="rpv-core__tooltip-body-full-screen-enter"],
+div[aria-describedby="rpv-core__tooltip-body-open"] {
+  @apply hidden;
+}
+
+@media print {
+  div[role="dialog"] {
+    @apply !opacity-0;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/**
+ * @bugfix webkit browsers - temporal fields with inconsistent inner padding
+ * This fix removes the inner padding normalizing the height of the input field.
+ * @see https://github.com/cferdinandi/kelp/issues/235
+ * @see https://git.inqool.cz/iqf/iqf-web-ui/-/merge_requests/266
+ */
+::-webkit-datetime-edit,
+::-webkit-datetime-edit-fields-wrapper,
+::-webkit-datetime-edit-text,
+::-webkit-datetime-edit-minute-field,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-meridiem-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-year-field {
+  padding: 0;
+}
+
+input::-webkit-inner-spin-button {
+  height: auto;
+}

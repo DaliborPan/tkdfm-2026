@@ -1,0 +1,5 @@
+/* Make popover content same width as trigger */
+.popover-content {
+  min-width: var(--radix-popover-trigger-width);
+  max-height: var(--radix-popover-content-available-height);
+}
