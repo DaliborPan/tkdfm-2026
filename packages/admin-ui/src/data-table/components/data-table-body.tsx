@@ -4,7 +4,7 @@ import {
 } from "@dnd-kit/sortable";
 import { type PropsWithChildren } from "react";
 
-import { TableBody, TableRow } from "iqf-web-ui/table";
+import { TableBody, TableRow } from "../../components/table";
 import { useDataTableContext } from "../context";
 import { DataTableRowCells } from "./data-table-row-cells";
 

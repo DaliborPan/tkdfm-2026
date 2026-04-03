@@ -7,13 +7,15 @@
     "./evidence": "./src/evidence/index.ts",
     "./data-table": "./src/data-table/index.ts",
     "./data-table-columns": "./src/data-table/columns/index.ts",
-    "./browse-data-query": "./src/data-table/hooks/browse-data-query.ts"
+    "./browse-data-query": "./src/data-table/hooks/browse-data-query.ts",
+    "./boolean": "./src/boolean/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
     "iqf-web-ui": "workspace:*"
   },
   "devDependencies": {
@@ -23,8 +25,8 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@tanstack/react-virtual": "^3.2.0",
     "@types/lodash": "^4.17.20",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
+    "@types/react": "^19.2.3",
+    "@types/react-dom": "^19.2.3",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "eslint": "^9.39.2",
@@ -41,12 +43,6 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-intl": "^7.1.14",
-    "react-router-dom": "^6.21.1",
     "zod": "^3.25.76"
-  },
-  "peerDependenciesMeta": {
-    "react-router-dom": {
-      "optional": true
-    }
   }
 }

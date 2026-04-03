@@ -3,7 +3,7 @@ import { type Row, flexRender } from "@tanstack/react-table";
 import { type BaseObject } from "iqf-web-ui/base";
 import { cn } from "iqf-web-ui/cn";
 
-import { TableCell } from "iqf-web-ui/table";
+import { TableCell } from "../../components/table";
 
 export function DataTableRowCells({ row }: { row: Row<BaseObject> }) {
   return row.getVisibleCells().map((cell) => (
@@ -16,7 +16,7 @@ export function DataTableRowCells({ row }: { row: Row<BaseObject> }) {
       style={{
         width: cell.column.getSize(),
       }}
-      onClick={(e) => {
+      onClick={(e: React.MouseEvent<HTMLTableCellElement>) => {
         if (cell.column.id === "select") {
           e.stopPropagation();
         }

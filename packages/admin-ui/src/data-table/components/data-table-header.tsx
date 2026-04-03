@@ -8,7 +8,7 @@ import { GripVertical } from "lucide-react";
 import { cn } from "iqf-web-ui/cn";
 import { Icon } from "iqf-web-ui/icon";
 
-import { TableHead, TableHeader, TableRow } from "iqf-web-ui/table";
+import { TableHead, TableHeader, TableRow } from "../../components/table";
 import { useDataTableContext } from "../context";
 
 export function DataTableHeader({ className }: { className?: string }) {

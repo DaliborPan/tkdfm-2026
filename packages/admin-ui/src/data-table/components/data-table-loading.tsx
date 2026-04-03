@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from "iqf-web-ui/table";
+import { TableCell, TableRow } from "../../components/table";
 
 import { useDataTableContext } from "../context";
 
