@@ -1,0 +1,40 @@
+{
+  "name": "@repo/admin-ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./evidence": "./src/evidence/index.ts",
+    "./data-table": "./src/data-table/index.ts",
+    "./data-table-columns": "./src/data-table-columns/index.ts",
+    "./browse-data-query": "./src/browse-data-query/index.ts",
+    "./boolean": "./src/boolean/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0"
+  },
+  "dependencies": {
+    "iqf-web-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "eslint": "^9.39.2",
+    "typescript": "5.7.2"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.85.5",
+    "lucide-react": "^0.453.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-intl": "^7.1.14",
+    "react-router": "^7.9.5",
+    "zod": "^3.25.76"
+  },
+  "peerDependenciesMeta": {
+    "react-router": {
+      "optional": true
+    }
+  }
+}
