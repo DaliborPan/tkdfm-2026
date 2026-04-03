@@ -7,8 +7,7 @@
     "./evidence": "./src/evidence/index.ts",
     "./data-table": "./src/data-table/index.ts",
     "./data-table-columns": "./src/data-table-columns/index.ts",
-    "./browse-data-query": "./src/browse-data-query/index.ts",
-    "./boolean": "./src/boolean/index.ts"
+    "./browse-data-query": "./src/browse-data-query/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
