@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { IntlProvider } from "@/components/intl-provider";
 import { Providers } from "@/components/providers";
+import { AppSidebarProvider } from "@/components/sidebar";
 import { getIntl } from "@/intl";
 
 import { getMeOrNull } from "../../../lib/get-me";
@@ -20,8 +21,7 @@ export default async function ProtectedLayout({ children }: PropsWithChildren) {
               redirect("/sign-in");
             }
 
-            // return <AppSidebarProvider>{children}</AppSidebarProvider>;
-            return <>{children}</>;
+            return <AppSidebarProvider>{children}</AppSidebarProvider>;
           })}
         </Suspense>
       </Providers>
