@@ -1,14 +1,38 @@
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
+import { getSessionCookie } from "better-auth/cookies";
 import { i18nRouter } from "next-i18n-router";
 
 import i18nConfig from "./intl/i18n";
 
-export function proxy(request: NextRequest) {
-  return i18nRouter(request, i18nConfig);
+function isI18nRedirect(response: Response) {
+  return response.status >= 300 && response.status < 400;
 }
 
-// only apply this middleware to files in the app directory
+function isPublicPath(pathname: string) {
+  return pathname.startsWith("/sign-in");
+}
+
+export function proxy(request: NextRequest) {
+  const i18nResponse = i18nRouter(request, i18nConfig);
+
+  if (isI18nRedirect(i18nResponse)) {
+    return i18nResponse;
+  }
+
+  const { pathname } = request.nextUrl;
+
+  if (isPublicPath(pathname)) {
+    return i18nResponse;
+  }
+
+  if (!getSessionCookie(request)) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+
+  return i18nResponse;
+}
+
 export const config = {
   matcher: [
     /*

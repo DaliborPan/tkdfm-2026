@@ -40,6 +40,9 @@ importers:
       '@formatjs/intl':
         specifier: ^3.1.6
         version: 3.1.8(typescript@5.7.2)
+      '@repo/backend':
+        specifier: workspace:*
+        version: link:../../packages/backend
       '@tanstack/react-query':
         specifier: ^5.85.5
         version: 5.95.2(react@19.2.4)
@@ -98,9 +101,6 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^16.2.1
         version: 16.2.1
-      '@repo/backend':
-        specifier: workspace:*
-        version: link:../../packages/backend
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
