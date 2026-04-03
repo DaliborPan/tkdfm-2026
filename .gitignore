@@ -34,3 +34,6 @@ apps/backoffice/.env
 
 # turbo
 .turbo
+
+# docs
+docs/
