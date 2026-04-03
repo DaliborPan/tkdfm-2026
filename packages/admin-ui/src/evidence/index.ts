@@ -1,1 +1,1 @@
-export * from "iqf-web-ui/evidence";
+export { Evidence } from "./evidence";
