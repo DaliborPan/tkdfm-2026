@@ -3,7 +3,7 @@
 import { type PropsWithChildren } from "react";
 
 import { Evidence } from "@repo/admin-ui/evidence";
-import { tkdPortalLogBrowseSchema } from "@repo/backend/tkd-portal-log";
+import { tkdPortalLogBrowseSchema } from "@repo/backend/tkd-portal-log/schema";
 
 import { useColumns } from "./columns";
 import { tkdPortalLogConf } from "./conf";

@@ -4,7 +4,7 @@ import { Evidence } from "@repo/admin-ui/evidence";
 import {
   tkdPortalLogDetailSchema,
   tkdPortalLogUpdateSchema,
-} from "@repo/backend/tkd-portal-log";
+} from "@repo/backend/tkd-portal-log/schema";
 
 import { FormFields } from "./form-fields";
 

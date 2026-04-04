@@ -1,5 +1,5 @@
 import { TypedColumns } from "@repo/admin-ui/data-table";
-import { type TkdPortalLogBrowseType } from "@repo/backend/tkd-portal-log";
+import { type TkdPortalLogBrowseType } from "@repo/backend/tkd-portal-log/schema";
 
 import { tkdPortalLogTypeOptions } from "./options";
 

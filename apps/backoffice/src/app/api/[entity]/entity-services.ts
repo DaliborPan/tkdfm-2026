@@ -1,4 +1,4 @@
-import { tkdPortalLogService } from "@repo/backend/tkd-portal-log";
+import { tkdPortalLogService } from "@repo/backend/tkd-portal-log/service";
 
 type EntityService = {
   browse: (body: unknown) => Promise<{ items: unknown[]; totalCount: number }>;
