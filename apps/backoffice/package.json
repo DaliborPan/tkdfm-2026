@@ -11,6 +11,7 @@
     "msg:extract": "formatjs extract --format simple --out-file src/intl/cs.json \"src/**/*.ts*\" && node ./src/intl/processLanguages.js"
   },
   "dependencies": {
+    "@repo/admin-ui": "workspace:*",
     "@formatjs/intl": "^3.1.6",
     "@tanstack/react-query": "^5.85.5",
     "better-auth": "^1.5.6",

@@ -7,6 +7,7 @@ export default [
   },
   {
     rules: {
+      "@typescript-eslint/no-explicit-any": "off",
       "turbo/no-undeclared-env-vars": [
         "error",
         {
