@@ -1,6 +1,6 @@
 import { type NextRequest } from "next/server";
 
-import { getEntityService } from "./entity-services";
+import { getEntityCaller } from "./entity-callers";
 
 type EntityParams = {
   params: Promise<{
@@ -10,16 +10,17 @@ type EntityParams = {
 
 export const POST = async (req: NextRequest, { params }: EntityParams) => {
   const { entity } = await params;
-  const service = getEntityService(entity);
+  const caller = getEntityCaller(entity);
 
-  if (!service) {
+  if (!caller) {
     return Response.json({ error: "Entity not found" }, { status: 404 });
   }
 
   const body = await req.json();
 
   try {
-    const created = await service.create(body);
+    const input = caller.create.schema.parse(body);
+    const created = await caller.create.handler(input);
 
     return Response.json(created, { status: 201 });
   } catch (error) {

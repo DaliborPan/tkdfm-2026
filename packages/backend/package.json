@@ -4,6 +4,7 @@
   "exports": {
     "./attendance": "./src/attendance/index.ts",
     "./auth": "./src/auth/index.ts",
+    "./auth/current-user": "./src/auth/current-user.ts",
     "./event-camp": "./src/event-camp/index.ts",
     "./event-competition": "./src/event-competition/index.ts",
     "./event-exam": "./src/event-exam/index.ts",
@@ -26,6 +27,7 @@
     "./group": "./src/group/index.ts",
     "./trainer": "./src/trainer/index.ts",
     "./training": "./src/training/index.ts",
+    "./utils/browse": "./src/utils/browse.ts",
     "./widget": "./src/widget/index.ts"
   },
   "scripts": {
