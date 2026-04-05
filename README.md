@@ -61,11 +61,11 @@ To change the default database name, update the `POSTGRES_DB` environment variab
 
 ### 3. Setup environment variables
 
-Once the database is ready, copy the `.env.example` file to the [`/packages/backend`](./packages/backend/) and [`/apps/web`](./apps/web/) directories as `.env`:
+Once the database is ready, copy the `.env.example` file to the [`/packages/backend`](./packages/backend/) and [`/apps/backoffice`](./apps/backoffice/) directories as `.env`:
 
 ```bash
 cp .env.example ./packages/backend/.env
-cp .env.example ./apps/web/.env
+cp .env.example ./apps/backoffice/.env
 ```
 
 This ensures Prisma has access to the `DATABASE_URL` environment variable, which is required to connect to your database.

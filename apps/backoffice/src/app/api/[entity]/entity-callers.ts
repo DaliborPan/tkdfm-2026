@@ -1,0 +1,33 @@
+import {
+  tkdPortalLogCreateSchema,
+  tkdPortalLogUpdateSchema,
+} from "@repo/backend/tkd-portal-log/schema";
+
+import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
+
+import {
+  createBrowseEntityCaller,
+  createCreateEntityCaller,
+  createDetailEntityCaller,
+  type EntityCaller,
+  createUpdateEntityCaller,
+} from "./callers";
+
+const entityCallers: Record<string, EntityCaller> = {
+  tkdPortalLog: {
+    ...createBrowseEntityCaller({ caller: tkdPortalLogCaller }),
+    ...createDetailEntityCaller({ caller: tkdPortalLogCaller }),
+    ...createCreateEntityCaller({
+      schema: tkdPortalLogCreateSchema,
+      caller: tkdPortalLogCaller,
+    }),
+    ...createUpdateEntityCaller({
+      schema: tkdPortalLogUpdateSchema,
+      caller: tkdPortalLogCaller,
+    }),
+  },
+};
+
+export function getEntityCaller(entity: string) {
+  return entityCallers[entity] ?? null;
+}
