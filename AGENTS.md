@@ -29,9 +29,11 @@
 - Do not call `headers()`, `cookies()`, `auth.api.getSession()`, or other framework/auth request APIs directly inside backend services.
 - For backoffice modules, prefer per-module server callers in `apps/backoffice/src/modules/<module>/server/` over one global caller.
 - Keep module callers execution-focused. Do not store DTO schemas in callers; keep schemas in backend schema modules and wire validation in the route/registry layer.
+- Prefer composing module callers from small operation helpers (`browse`, `detail`, `create`, `update`) so readonly modules can expose only the operations they actually support.
 - API routes and Server Components should call those module callers instead of talking to backend services directly.
 - If an API route needs validation, keep parsing in the route layer or module caller layer, before calling the backend service.
 - Reuse request context through an app-level request-context helper so auth/session lookup is centralized and not repeated across every Server Component.
+- Generic API route registries should allow partial operation support and return `405 Method Not Allowed` when an entity exists but the requested operation is not implemented.
 
 ## iqf-web Packages
 

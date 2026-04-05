@@ -1,7 +1,15 @@
 import { tkdPortalLogService } from "@repo/backend/tkd-portal-log/service";
 
-import { createCrudModuleCaller } from "@/lib/server/create-crud-module-caller";
+import {
+  createBrowseCaller,
+  createCreateCaller,
+  createDetailCaller,
+  createUpdateCaller,
+} from "@/lib/server/callers";
 
-export const tkdPortalLogCaller = createCrudModuleCaller({
-  service: tkdPortalLogService,
-});
+export const tkdPortalLogCaller = {
+  ...createBrowseCaller(tkdPortalLogService),
+  ...createDetailCaller(tkdPortalLogService),
+  ...createCreateCaller(tkdPortalLogService),
+  ...createUpdateCaller(tkdPortalLogService),
+};

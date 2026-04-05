@@ -9,73 +9,94 @@ type ParseableSchema<T> = {
   parse: (input: unknown) => T;
 };
 
-type CrudCaller<
-  TBrowseInput,
-  TBrowseResult,
-  TDetail,
-  TCreateInput,
-  TUpdateInput,
-> = {
-  browse: (input: TBrowseInput) => Promise<TBrowseResult>;
+type BrowseHandler<TBrowseResult> = {
+  browse: (input: BrowseBodyType) => Promise<TBrowseResult>;
+};
+
+type DetailHandler<TDetail> = {
   get: (id: string) => Promise<TDetail | null>;
+};
+
+type CreateHandler<TCreateInput, TDetail> = {
   create: (input: TCreateInput) => Promise<TDetail>;
+};
+
+type UpdateHandler<TUpdateInput, TDetail> = {
   update: (id: string, input: TUpdateInput) => Promise<TDetail>;
 };
 
 export type EntityCaller = {
-  browse: {
+  browse?: {
     schema: z.ZodSchema<BrowseBodyType>;
     handler: (
       input: unknown,
     ) => Promise<{ items: unknown[]; totalCount: number }>;
   };
-  get: {
+  get?: {
     handler: (id: string) => Promise<unknown | null>;
   };
-  create: {
+  create?: {
     schema: ParseableSchema<unknown>;
     handler: (input: unknown) => Promise<unknown>;
   };
-  update: {
+  update?: {
     schema: ParseableSchema<unknown>;
     handler: (id: string, input: unknown) => Promise<unknown>;
   };
 };
 
-export function createCrudEntityCaller<
+export function createBrowseEntityCaller<
   TBrowseResult extends { items: unknown[]; totalCount: number },
-  TDetail,
-  TCreateInput,
-  TUpdateInput,
 >({
-  createSchema,
-  updateSchema,
   caller,
 }: {
-  createSchema: ParseableSchema<TCreateInput>;
-  updateSchema: ParseableSchema<TUpdateInput>;
-  caller: CrudCaller<
-    BrowseBodyType,
-    TBrowseResult,
-    TDetail,
-    TCreateInput,
-    TUpdateInput
-  >;
+  caller: BrowseHandler<TBrowseResult>;
 }) {
   return {
     browse: {
       schema: browseBodySchema,
       handler: (input: unknown) => caller.browse(input as BrowseBodyType),
     },
+  } satisfies EntityCaller;
+}
+
+export function createDetailEntityCaller<TDetail>({
+  caller,
+}: {
+  caller: DetailHandler<TDetail>;
+}) {
+  return {
     get: {
       handler: caller.get,
     },
+  } satisfies EntityCaller;
+}
+
+export function createCreateEntityCaller<TCreateInput, TDetail>({
+  schema,
+  caller,
+}: {
+  schema: ParseableSchema<TCreateInput>;
+  caller: CreateHandler<TCreateInput, TDetail>;
+}) {
+  return {
     create: {
-      schema: createSchema,
+      schema,
       handler: (input: unknown) => caller.create(input as TCreateInput),
     },
+  } satisfies EntityCaller;
+}
+
+export function createUpdateEntityCaller<TUpdateInput, TDetail>({
+  schema,
+  caller,
+}: {
+  schema: ParseableSchema<TUpdateInput>;
+  caller: UpdateHandler<TUpdateInput, TDetail>;
+}) {
+  return {
     update: {
-      schema: updateSchema,
+      schema,
       handler: (id: string, input: unknown) =>
         caller.update(id, input as TUpdateInput),
     },

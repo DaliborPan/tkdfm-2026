@@ -1,66 +1,68 @@
-import type { CurrentUserType } from "../auth/current-user";
-import { type BrowseBodyType } from "../utils";
+import { type CurrentUserType } from "../auth/current-user";
+import {
+  type EntityServiceBrowseType,
+  type EntityServiceCreateType,
+  type EntityServiceGetType,
+  type EntityServiceUpdateType,
+} from "../types";
 import { tkdPortalLogMapper } from "./mapper";
 import { tkdPortalLogRepository } from "./repository";
 import {
+  type TkdPortalLogBrowseType,
   type TkdPortalLogCreateType,
+  type TkdPortalLogDetailType,
   type TkdPortalLogUpdateType,
 } from "./schema";
 
+const browse: EntityServiceBrowseType<{
+  items: TkdPortalLogBrowseType[];
+  totalCount: number;
+}> = async ({ input, currentUser: _currentUser }) => {
+  const result = await tkdPortalLogRepository.browse(input);
+  return {
+    items: result.items.map(tkdPortalLogMapper.toTkdPortalLogBrowse),
+    totalCount: result.totalCount,
+  };
+};
+
+const get: EntityServiceGetType<TkdPortalLogDetailType> = async ({
+  id,
+  currentUser: _currentUser,
+}) => {
+  const row = await tkdPortalLogRepository.get(id);
+  return row ? tkdPortalLogMapper.toTkdPortalLogDetail(row) : null;
+};
+
+const create: EntityServiceCreateType<
+  TkdPortalLogCreateType,
+  TkdPortalLogDetailType
+> = async ({ input, currentUser: _currentUser }) => {
+  const row = await tkdPortalLogRepository.create(input);
+  return tkdPortalLogMapper.toTkdPortalLogDetail(row);
+};
+
+const update: EntityServiceUpdateType<
+  TkdPortalLogUpdateType,
+  TkdPortalLogDetailType
+> = async ({ id, input, currentUser: _currentUser }) => {
+  const row = await tkdPortalLogRepository.update(id, input);
+  return tkdPortalLogMapper.toTkdPortalLogDetail(row);
+};
+
+const findAll = async ({
+  currentUser: _currentUser,
+}: {
+  currentUser: CurrentUserType;
+}) => {
+  const rows = await tkdPortalLogRepository.findAll();
+  return rows.map(tkdPortalLogMapper.toTkdPortalLogDetail);
+};
+
 export const tkdPortalLogService = {
-  async browse({
-    input,
-    currentUser: _currentUser,
-  }: {
-    input: BrowseBodyType;
-    currentUser: CurrentUserType;
-  }) {
-    const result = await tkdPortalLogRepository.browse(input);
+  browse,
+  get,
+  create,
+  update,
 
-    return {
-      items: result.items.map(tkdPortalLogMapper.toTkdPortalLogBrowse),
-      totalCount: result.totalCount,
-    };
-  },
-
-  async findAll() {
-    const rows = await tkdPortalLogRepository.findAll();
-    return rows.map(tkdPortalLogMapper.toTkdPortalLogDetail);
-  },
-
-  async get({
-    id,
-    currentUser: _currentUser,
-  }: {
-    id: string;
-    currentUser: CurrentUserType;
-  }) {
-    const row = await tkdPortalLogRepository.get(id);
-    return row ? tkdPortalLogMapper.toTkdPortalLogDetail(row) : null;
-  },
-
-  async create({
-    input,
-    currentUser: _currentUser,
-  }: {
-    input: TkdPortalLogCreateType;
-    currentUser: CurrentUserType;
-  }) {
-    const row = await tkdPortalLogRepository.create(input);
-    return tkdPortalLogMapper.toTkdPortalLogDetail(row);
-  },
-
-  async update({
-    id,
-    input,
-    currentUser: _currentUser,
-  }: {
-    id: string;
-    input: TkdPortalLogUpdateType;
-    currentUser: CurrentUserType;
-  }) {
-    const { id: _id, ...updateData } = input;
-    const row = await tkdPortalLogRepository.update(id, updateData);
-    return tkdPortalLogMapper.toTkdPortalLogDetail(row);
-  },
+  findAll,
 };

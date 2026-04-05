@@ -17,6 +17,10 @@ export const GET = async (_req: NextRequest, { params }: EntityIdParams) => {
     return Response.json({ error: "Entity not found" }, { status: 404 });
   }
 
+  if (!caller.get) {
+    return Response.json({ error: "Method not allowed" }, { status: 405 });
+  }
+
   const obj = await caller.get.handler(id);
 
   if (!obj) {
@@ -32,6 +36,10 @@ export const PUT = async (req: NextRequest, { params }: EntityIdParams) => {
 
   if (!caller) {
     return Response.json({ error: "Entity not found" }, { status: 404 });
+  }
+
+  if (!caller.update) {
+    return Response.json({ error: "Method not allowed" }, { status: 405 });
   }
 
   const body = await req.json();

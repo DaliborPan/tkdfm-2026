@@ -6,16 +6,26 @@ import {
 import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
 
 import {
+  createBrowseEntityCaller,
+  createCreateEntityCaller,
+  createDetailEntityCaller,
   type EntityCaller,
-  createCrudEntityCaller,
-} from "./create-crud-entity-caller";
+  createUpdateEntityCaller,
+} from "./callers";
 
 const entityCallers: Record<string, EntityCaller> = {
-  tkdPortalLog: createCrudEntityCaller({
-    createSchema: tkdPortalLogCreateSchema,
-    updateSchema: tkdPortalLogUpdateSchema,
-    caller: tkdPortalLogCaller,
-  }),
+  tkdPortalLog: {
+    ...createBrowseEntityCaller({ caller: tkdPortalLogCaller }),
+    ...createDetailEntityCaller({ caller: tkdPortalLogCaller }),
+    ...createCreateEntityCaller({
+      schema: tkdPortalLogCreateSchema,
+      caller: tkdPortalLogCaller,
+    }),
+    ...createUpdateEntityCaller({
+      schema: tkdPortalLogUpdateSchema,
+      caller: tkdPortalLogCaller,
+    }),
+  },
 };
 
 export function getEntityCaller(entity: string) {

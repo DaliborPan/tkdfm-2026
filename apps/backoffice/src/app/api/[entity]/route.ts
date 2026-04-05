@@ -16,6 +16,10 @@ export const POST = async (req: NextRequest, { params }: EntityParams) => {
     return Response.json({ error: "Entity not found" }, { status: 404 });
   }
 
+  if (!caller.create) {
+    return Response.json({ error: "Method not allowed" }, { status: 405 });
+  }
+
   const body = await req.json();
 
   try {
