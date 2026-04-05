@@ -5,6 +5,7 @@ import {
   type EntityServiceGetType,
   type EntityServiceUpdateType,
 } from "../types";
+import { validateTrainer } from "../utils/validation";
 import { tkdPortalLogMapper } from "./mapper";
 import { tkdPortalLogRepository } from "./repository";
 import {
@@ -17,7 +18,9 @@ import {
 const browse: EntityServiceBrowseType<{
   items: TkdPortalLogBrowseType[];
   totalCount: number;
-}> = async ({ input, currentUser: _currentUser }) => {
+}> = async ({ input, currentUser }) => {
+  validateTrainer(currentUser);
+
   const result = await tkdPortalLogRepository.browse(input);
   return {
     items: result.items.map(tkdPortalLogMapper.toTkdPortalLogBrowse),
@@ -27,8 +30,10 @@ const browse: EntityServiceBrowseType<{
 
 const get: EntityServiceGetType<TkdPortalLogDetailType> = async ({
   id,
-  currentUser: _currentUser,
+  currentUser,
 }) => {
+  validateTrainer(currentUser);
+
   const row = await tkdPortalLogRepository.get(id);
   return row ? tkdPortalLogMapper.toTkdPortalLogDetail(row) : null;
 };
@@ -36,7 +41,9 @@ const get: EntityServiceGetType<TkdPortalLogDetailType> = async ({
 const create: EntityServiceCreateType<
   TkdPortalLogCreateType,
   TkdPortalLogDetailType
-> = async ({ input, currentUser: _currentUser }) => {
+> = async ({ input, currentUser }) => {
+  validateTrainer(currentUser);
+
   const row = await tkdPortalLogRepository.create(input);
   return tkdPortalLogMapper.toTkdPortalLogDetail(row);
 };
@@ -44,16 +51,16 @@ const create: EntityServiceCreateType<
 const update: EntityServiceUpdateType<
   TkdPortalLogUpdateType,
   TkdPortalLogDetailType
-> = async ({ id, input, currentUser: _currentUser }) => {
+> = async ({ id, input, currentUser }) => {
+  validateTrainer(currentUser);
+
   const row = await tkdPortalLogRepository.update(id, input);
   return tkdPortalLogMapper.toTkdPortalLogDetail(row);
 };
 
-const findAll = async ({
-  currentUser: _currentUser,
-}: {
-  currentUser: CurrentUserType;
-}) => {
+const findAll = async ({ currentUser }: { currentUser: CurrentUserType }) => {
+  validateTrainer(currentUser);
+
   const rows = await tkdPortalLogRepository.findAll();
   return rows.map(tkdPortalLogMapper.toTkdPortalLogDetail);
 };
