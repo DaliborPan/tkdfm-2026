@@ -34,40 +34,41 @@ export function EvidenceLayout({
   const initialDetailPanelSize = useRef(detailPanelSize);
 
   return (
-    <ResizablePanelGroup className="flex grow flex-col items-stretch">
+    <ResizablePanelGroup
+      className={cn(
+        "flex grow flex-col items-stretch",
+        "[&>div[data-panel=true]]:!m-2",
+        !itemId && "[&>div[data-panel=true]]:!flex-1",
+        itemId &&
+          "[&>div[data-panel=true]:first-child]:hidden md:[&>div[data-panel=true]:first-child]:flex",
+      )}
+    >
       <ResizablePanel
         id="evidence-table"
-        className={cn(
-          "@container/table m-3 flex-col rounded-lg border md:flex",
-          itemId ? "hidden" : "flex",
-        )}
-        minSize={0}
-        maxSize={100}
+        className="@container/table flex flex-col rounded-lg border"
       >
         {table}
       </ResizablePanel>
 
-      <ResizableSeparator
-        className={cn(itemId && "hidden md:flex")}
-        withHandle={true}
-      />
-
       {itemId && (
-        <ResizablePanel
-          id="evidence-detail"
-          minSize="25%"
-          maxSize="100%"
-          style={{
-            overflowY: "auto",
-          }}
-          defaultSize={`${initialDetailPanelSize.current}%`}
-          onResize={(size) => {
-            setDetailPanelSize(size.asPercentage);
-          }}
-          className="my-3 mr-3 rounded-lg border"
-        >
-          {detail}
-        </ResizablePanel>
+        <>
+          <ResizableSeparator className="hidden md:flex" withHandle={true} />
+          <ResizablePanel
+            id="evidence-detail"
+            minSize="25%"
+            maxSize="100%"
+            style={{
+              overflowY: "auto",
+            }}
+            defaultSize={`${initialDetailPanelSize.current}%`}
+            onResize={(size) => {
+              setDetailPanelSize(size.asPercentage);
+            }}
+            className="rounded-lg border"
+          >
+            {detail}
+          </ResizablePanel>
+        </>
       )}
     </ResizablePanelGroup>
   );
