@@ -1,22 +1,30 @@
+import { type CurrentUserType } from "@repo/backend/auth/current-user";
+
 import { getRequestContext } from "./request-context";
 
-type CrudService<TBrowseInput, TBrowseResult, TDetail, TCreateInput, TUpdateInput> = {
+type CrudService<
+  TBrowseInput,
+  TBrowseResult,
+  TDetail,
+  TCreateInput,
+  TUpdateInput,
+> = {
   browse: (params: {
     input: TBrowseInput;
-    currentUser: Awaited<ReturnType<typeof getRequestContext>>["currentUser"];
+    currentUser: CurrentUserType;
   }) => Promise<TBrowseResult>;
   get: (params: {
     id: string;
-    currentUser: Awaited<ReturnType<typeof getRequestContext>>["currentUser"];
+    currentUser: CurrentUserType;
   }) => Promise<TDetail | null>;
   create: (params: {
     input: TCreateInput;
-    currentUser: Awaited<ReturnType<typeof getRequestContext>>["currentUser"];
+    currentUser: CurrentUserType;
   }) => Promise<TDetail>;
   update: (params: {
     id: string;
     input: TUpdateInput;
-    currentUser: Awaited<ReturnType<typeof getRequestContext>>["currentUser"];
+    currentUser: CurrentUserType;
   }) => Promise<TDetail>;
 };
 

@@ -1,8 +1,21 @@
+import { type z } from "zod";
+
+import {
+  type BrowseBodyType,
+  browseBodySchema,
+} from "@repo/backend/utils/browse";
+
 type ParseableSchema<T> = {
   parse: (input: unknown) => T;
 };
 
-type CrudCaller<TBrowseInput, TBrowseResult, TDetail, TCreateInput, TUpdateInput> = {
+type CrudCaller<
+  TBrowseInput,
+  TBrowseResult,
+  TDetail,
+  TCreateInput,
+  TUpdateInput,
+> = {
   browse: (input: TBrowseInput) => Promise<TBrowseResult>;
   get: (id: string) => Promise<TDetail | null>;
   create: (input: TCreateInput) => Promise<TDetail>;
@@ -11,8 +24,10 @@ type CrudCaller<TBrowseInput, TBrowseResult, TDetail, TCreateInput, TUpdateInput
 
 export type EntityCaller = {
   browse: {
-    schema: ParseableSchema<unknown>;
-    handler: (input: unknown) => Promise<{ items: unknown[]; totalCount: number }>;
+    schema: z.ZodSchema<BrowseBodyType>;
+    handler: (
+      input: unknown,
+    ) => Promise<{ items: unknown[]; totalCount: number }>;
   };
   get: {
     handler: (id: string) => Promise<unknown | null>;
@@ -28,22 +43,19 @@ export type EntityCaller = {
 };
 
 export function createCrudEntityCaller<
-  TBrowseInput,
   TBrowseResult extends { items: unknown[]; totalCount: number },
   TDetail,
   TCreateInput,
   TUpdateInput,
 >({
-  browseSchema,
   createSchema,
   updateSchema,
   caller,
 }: {
-  browseSchema: ParseableSchema<TBrowseInput>;
   createSchema: ParseableSchema<TCreateInput>;
   updateSchema: ParseableSchema<TUpdateInput>;
   caller: CrudCaller<
-    TBrowseInput,
+    BrowseBodyType,
     TBrowseResult,
     TDetail,
     TCreateInput,
@@ -52,8 +64,8 @@ export function createCrudEntityCaller<
 }) {
   return {
     browse: {
-      schema: browseSchema,
-      handler: (input: unknown) => caller.browse(input as TBrowseInput),
+      schema: browseBodySchema,
+      handler: (input: unknown) => caller.browse(input as BrowseBodyType),
     },
     get: {
       handler: caller.get,

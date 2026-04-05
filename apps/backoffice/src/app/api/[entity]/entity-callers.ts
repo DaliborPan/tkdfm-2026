@@ -2,7 +2,6 @@ import {
   tkdPortalLogCreateSchema,
   tkdPortalLogUpdateSchema,
 } from "@repo/backend/tkd-portal-log/schema";
-import { browseBodySchema } from "@repo/backend/utils/browse";
 
 import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
 
@@ -13,7 +12,6 @@ import {
 
 const entityCallers: Record<string, EntityCaller> = {
   tkdPortalLog: createCrudEntityCaller({
-    browseSchema: browseBodySchema,
     createSchema: tkdPortalLogCreateSchema,
     updateSchema: tkdPortalLogUpdateSchema,
     caller: tkdPortalLogCaller,
