@@ -1,4 +1,9 @@
-import { type CurrentUserType } from "@repo/backend/auth/current-user";
+import {
+  type EntityServiceBrowseType,
+  type EntityServiceCreateType,
+  type EntityServiceGetType,
+  type EntityServiceUpdateType,
+} from "@repo/backend/types";
 import { type BrowseBodyType } from "@repo/backend/utils/browse";
 
 import { getRequestContext } from "./request-context";
@@ -11,10 +16,7 @@ import { getRequestContext } from "./request-context";
 export function createBrowseCaller<TBrowseResult>({
   browse,
 }: {
-  browse: (params: {
-    input: BrowseBodyType;
-    currentUser: CurrentUserType;
-  }) => Promise<TBrowseResult>;
+  browse: EntityServiceBrowseType<TBrowseResult>;
 }) {
   return {
     browse: async (input: BrowseBodyType) => {
@@ -33,10 +35,7 @@ export function createBrowseCaller<TBrowseResult>({
 export function createDetailCaller<TDetail>({
   get,
 }: {
-  get: (params: {
-    id: string;
-    currentUser: CurrentUserType;
-  }) => Promise<TDetail | null>;
+  get: EntityServiceGetType<TDetail>;
 }) {
   return {
     get: async (id: string) => {
@@ -55,10 +54,7 @@ export function createDetailCaller<TDetail>({
 export function createCreateCaller<TCreateInput, TDetail>({
   create,
 }: {
-  create: (params: {
-    input: TCreateInput;
-    currentUser: CurrentUserType;
-  }) => Promise<TDetail>;
+  create: EntityServiceCreateType<TCreateInput, TDetail>;
 }) {
   return {
     create: async (input: TCreateInput) => {
@@ -77,11 +73,7 @@ export function createCreateCaller<TCreateInput, TDetail>({
 export function createUpdateCaller<TUpdateInput, TDetail>({
   update,
 }: {
-  update: (params: {
-    id: string;
-    input: TUpdateInput;
-    currentUser: CurrentUserType;
-  }) => Promise<TDetail>;
+  update: EntityServiceUpdateType<TUpdateInput, TDetail>;
 }) {
   return {
     update: async (id: string, input: TUpdateInput) => {

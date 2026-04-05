@@ -28,7 +28,8 @@
     "./trainer": "./src/trainer/index.ts",
     "./training": "./src/training/index.ts",
     "./utils/browse": "./src/utils/browse.ts",
-    "./widget": "./src/widget/index.ts"
+    "./widget": "./src/widget/index.ts",
+    "./types": "./src/types.ts"
   },
   "scripts": {
     "db:push": "prisma db push",
