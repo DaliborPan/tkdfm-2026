@@ -13,16 +13,14 @@ import { getRequestContext } from "./request-context";
  *
  * Acceppts a service object that implements the browse method.
  */
-export function createBrowseCaller<TBrowseResult>({
-  browse,
-}: {
+export function createBrowseCaller<TBrowseResult>(service: {
   browse: EntityServiceBrowseType<TBrowseResult>;
 }) {
   return {
     browse: async (input: BrowseBodyType) => {
       const { currentUser } = await getRequestContext();
 
-      return browse({ input, currentUser });
+      return service.browse({ input, currentUser });
     },
   };
 }
@@ -32,16 +30,14 @@ export function createBrowseCaller<TBrowseResult>({
  *
  * Acceppts a service object that implements the get method.
  */
-export function createDetailCaller<TDetail>({
-  get,
-}: {
+export function createDetailCaller<TDetail>(service: {
   get: EntityServiceGetType<TDetail>;
 }) {
   return {
     get: async (id: string) => {
       const { currentUser } = await getRequestContext();
 
-      return get({ id, currentUser });
+      return service.get({ id, currentUser });
     },
   };
 }
@@ -51,16 +47,14 @@ export function createDetailCaller<TDetail>({
  *
  * Acceppts a service object that implements the create method.
  */
-export function createCreateCaller<TCreateInput, TDetail>({
-  create,
-}: {
+export function createCreateCaller<TCreateInput, TDetail>(service: {
   create: EntityServiceCreateType<TCreateInput, TDetail>;
 }) {
   return {
     create: async (input: TCreateInput) => {
       const { currentUser } = await getRequestContext();
 
-      return create({ input, currentUser });
+      return service.create({ input, currentUser });
     },
   };
 }
@@ -70,16 +64,14 @@ export function createCreateCaller<TCreateInput, TDetail>({
  *
  * Acceppts a service object that implements the update method.
  */
-export function createUpdateCaller<TUpdateInput, TDetail>({
-  update,
-}: {
+export function createUpdateCaller<TUpdateInput, TDetail>(service: {
   update: EntityServiceUpdateType<TUpdateInput, TDetail>;
 }) {
   return {
     update: async (id: string, input: TUpdateInput) => {
       const { currentUser } = await getRequestContext();
 
-      return update({ id, input, currentUser });
+      return service.update({ id, input, currentUser });
     },
   };
 }
