@@ -1,15 +1,14 @@
 "use client";
 
 import { Evidence } from "@repo/admin-ui/evidence";
-import { groupDetailSchema } from "@repo/backend/group/schema";
+import { groupDetailSchema, groupUpdateSchema } from "@repo/backend/group/schema";
 
 import { FormFields } from "./form-fields";
 
 export function GroupDetail() {
   return (
     <Evidence.Detail
-      readOnly={true}
-      formSchema={groupDetailSchema}
+      formSchema={groupUpdateSchema}
       detailSchema={groupDetailSchema}
       titleMapper={(data) => data.name}
     >

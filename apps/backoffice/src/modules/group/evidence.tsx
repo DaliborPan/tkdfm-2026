@@ -14,7 +14,6 @@ export function GroupEvidence({ children }: PropsWithChildren) {
   return (
     <Evidence
       conf={groupConf}
-      readOnly={true}
       table={
         <Evidence.Table
           title="Evidence skupin"
@@ -22,6 +21,7 @@ export function GroupEvidence({ children }: PropsWithChildren) {
           tableSchema={groupBrowseSchema}
           tableCaption={{
             showSearch: false,
+            showNew: false,
           }}
         />
       }

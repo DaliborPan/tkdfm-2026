@@ -1,3 +1,4 @@
+import { groupUpdateSchema } from "@repo/backend/group/schema";
 import { helpdeskTicketUpdateSchema } from "@repo/backend/helpdesk-ticket/schema";
 import {
   tkdPortalLogCreateSchema,
@@ -20,6 +21,10 @@ const entityCallers: Record<string, EntityCaller> = {
   group: {
     ...createBrowseEntityCaller({ caller: groupCaller }),
     ...createDetailEntityCaller({ caller: groupCaller }),
+    ...createUpdateEntityCaller({
+      schema: groupUpdateSchema,
+      caller: groupCaller,
+    }),
   },
   helpdeskTicket: {
     ...createBrowseEntityCaller({ caller: helpdeskTicketCaller }),

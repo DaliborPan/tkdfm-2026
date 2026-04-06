@@ -1,3 +1,4 @@
+import { type Prisma } from "../../generated/client";
 import { createBrowseResult } from "../repository/utils/browse";
 import {
   type BrowseBodyType,
@@ -42,6 +43,16 @@ export const groupRepository = {
       where: {
         id,
       },
+      include: includeCounts,
+    });
+  },
+
+  async update(id: string, data: Prisma.GroupUpdateInput) {
+    return prisma.group.update({
+      where: {
+        id,
+      },
+      data,
       include: includeCounts,
     });
   },
