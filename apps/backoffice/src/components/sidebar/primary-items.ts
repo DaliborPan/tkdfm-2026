@@ -36,7 +36,7 @@ export function usePrimaryItems(): PrimaryMenuItemType[] {
     {
       label: intl.formatMessage({
         id: "sidebar.primary-items.tkd-portal-log",
-        defaultMessage: "Log zmen ze svazu",
+        defaultMessage: "Log změn ze svazu",
       }),
       href: tkdPortalLogConf.url,
       icon: {

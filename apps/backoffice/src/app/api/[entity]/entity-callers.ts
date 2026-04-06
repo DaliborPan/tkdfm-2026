@@ -1,3 +1,4 @@
+import { helpdeskTicketUpdateSchema } from "@repo/backend/helpdesk-ticket/schema";
 import {
   tkdPortalLogCreateSchema,
   tkdPortalLogUpdateSchema,
@@ -18,6 +19,10 @@ const entityCallers: Record<string, EntityCaller> = {
   helpdeskTicket: {
     ...createBrowseEntityCaller({ caller: helpdeskTicketCaller }),
     ...createDetailEntityCaller({ caller: helpdeskTicketCaller }),
+    ...createUpdateEntityCaller({
+      schema: helpdeskTicketUpdateSchema,
+      caller: helpdeskTicketCaller,
+    }),
   },
   tkdPortalLog: {
     ...createBrowseEntityCaller({ caller: tkdPortalLogCaller }),

@@ -1,10 +1,10 @@
 export const helpdeskTicketStatusOptions = [
   {
     id: "NEW",
-    title: "Novy",
+    title: "Nový",
   },
   {
     id: "CLOSED",
-    title: "Vyreseny",
+    title: "Vyřešený",
   },
 ];

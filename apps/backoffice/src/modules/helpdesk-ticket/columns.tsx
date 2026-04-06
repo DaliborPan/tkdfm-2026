@@ -11,10 +11,10 @@ export const useColumns = () => {
     id: "reporterName",
     cell: ({ row }) => (
       <TextColumnCell
-        value={row.original.reporterName ?? "Neprihlaseny uzivatel"}
+        value={row.original.reporterName ?? "Nepřihlášený uživatel"}
       />
     ),
-    label: "Jmeno",
+    label: "Jméno",
     enableFilter: false,
     enableSorting: false,
     minSize: 240,
@@ -28,7 +28,7 @@ export const useColumns = () => {
 
   const createdAtColumn = tableColumn.date({
     name: "createdAt",
-    label: "Vytvoreno",
+    label: "Vytvořeno",
     enableFilter: false,
   });
 

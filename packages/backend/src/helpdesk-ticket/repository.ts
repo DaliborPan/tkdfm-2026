@@ -6,6 +6,7 @@ import {
   createWhereObject,
 } from "../utils";
 import { prisma } from "../client";
+import { type HelpdeskTicketUpdateType } from "./schema";
 
 const includeReporter = {
   parent: {
@@ -39,6 +40,18 @@ export const helpdeskTicketRepository = {
     return prisma.helpdeskTicket.findUnique({
       where: {
         id,
+      },
+      include: includeReporter,
+    });
+  },
+
+  async update(id: string, data: HelpdeskTicketUpdateType) {
+    return prisma.helpdeskTicket.update({
+      where: {
+        id,
+      },
+      data: {
+        status: data.status,
       },
       include: includeReporter,
     });

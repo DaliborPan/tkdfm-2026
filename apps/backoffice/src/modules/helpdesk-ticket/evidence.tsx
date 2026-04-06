@@ -14,14 +14,14 @@ export function HelpdeskTicketEvidence({ children }: PropsWithChildren) {
   return (
     <Evidence
       conf={helpdeskTicketConf}
-      readOnly={true}
       table={
         <Evidence.Table
-          title="Nahlasene chyby"
+          title="Nahlášené chyby"
           columns={columns}
           tableSchema={helpdeskTicketBrowseSchema}
           tableCaption={{
             showSearch: false,
+            showNew: false,
           }}
         />
       }
