@@ -3,6 +3,7 @@ import {
   tkdPortalLogUpdateSchema,
 } from "@repo/backend/tkd-portal-log/schema";
 
+import { helpdeskTicketCaller } from "@/modules/helpdesk-ticket/server/caller";
 import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
 
 import {
@@ -14,6 +15,10 @@ import {
 } from "./callers";
 
 const entityCallers: Record<string, EntityCaller> = {
+  helpdeskTicket: {
+    ...createBrowseEntityCaller({ caller: helpdeskTicketCaller }),
+    ...createDetailEntityCaller({ caller: helpdeskTicketCaller }),
+  },
   tkdPortalLog: {
     ...createBrowseEntityCaller({ caller: tkdPortalLogCaller }),
     ...createDetailEntityCaller({ caller: tkdPortalLogCaller }),
