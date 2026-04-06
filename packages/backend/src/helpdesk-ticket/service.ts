@@ -42,7 +42,9 @@ const update: EntityServiceUpdateType<
 > = async ({ id, input, currentUser }) => {
   validateTrainer(currentUser);
 
-  const row = await helpdeskTicketRepository.update(id, input);
+  const row = await helpdeskTicketRepository.update(id, {
+    status: input.status,
+  });
   return helpdeskTicketMapper.toHelpdeskTicketDetail(row);
 };
 

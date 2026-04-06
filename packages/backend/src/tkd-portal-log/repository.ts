@@ -1,4 +1,4 @@
-import type { TkdPortalLogCreateType, TkdPortalLogUpdateType } from "./schema";
+import { type Prisma } from "../../generated/client";
 import { prisma } from "../client";
 import { createBrowseResult } from "../repository/utils/browse";
 import {
@@ -9,13 +9,13 @@ import {
 } from "../utils";
 
 export const tkdPortalLogRepository = {
-  async create(data: TkdPortalLogCreateType) {
+  async create(data: Prisma.TkdPortalLogCreateInput) {
     return prisma.tkdPortalLog.create({
       data,
     });
   },
 
-  async update(id: string, data: Omit<TkdPortalLogUpdateType, "id">) {
+  async update(id: string, data: Prisma.TkdPortalLogUpdateInput) {
     return prisma.tkdPortalLog.update({
       where: {
         id,

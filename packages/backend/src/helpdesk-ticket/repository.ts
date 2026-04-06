@@ -1,3 +1,5 @@
+import { type Prisma } from "../../generated/client";
+import { prisma } from "../client";
 import { createBrowseResult } from "../repository/utils/browse";
 import {
   type BrowseBodyType,
@@ -5,8 +7,6 @@ import {
   createPaginationObject,
   createWhereObject,
 } from "../utils";
-import { prisma } from "../client";
-import { type HelpdeskTicketUpdateType } from "./schema";
 
 const includeReporter = {
   parent: {
@@ -45,7 +45,7 @@ export const helpdeskTicketRepository = {
     });
   },
 
-  async update(id: string, data: HelpdeskTicketUpdateType) {
+  async update(id: string, data: Prisma.HelpdeskTicketUpdateInput) {
     return prisma.helpdeskTicket.update({
       where: {
         id,
