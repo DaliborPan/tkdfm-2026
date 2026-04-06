@@ -1,7 +1,8 @@
 import { type PrimaryMenuItemType, isActive } from "iqf-web-ui/app-sidebar";
-import { Home, Logs } from "lucide-react";
+import { Home, Logs, ShieldAlert } from "lucide-react";
 import { useIntl } from "react-intl";
 
+import { helpdeskTicketConf } from "@/modules/helpdesk-ticket/conf";
 import { tkdPortalLogConf } from "@/modules/tkd-portal-log/conf";
 
 export function usePrimaryItems(): PrimaryMenuItemType[] {
@@ -22,8 +23,20 @@ export function usePrimaryItems(): PrimaryMenuItemType[] {
     },
     {
       label: intl.formatMessage({
+        id: "sidebar.primary-items.helpdesk-ticket",
+        defaultMessage: "Helpdesk",
+      }),
+      href: helpdeskTicketConf.url,
+      icon: {
+        Icon: ShieldAlert,
+      },
+      align: "top",
+      isActive: (href) => isActive([helpdeskTicketConf.url], href),
+    },
+    {
+      label: intl.formatMessage({
         id: "sidebar.primary-items.tkd-portal-log",
-        defaultMessage: "Log zmen ze svazu",
+        defaultMessage: "Log změn ze svazu",
       }),
       href: tkdPortalLogConf.url,
       icon: {
