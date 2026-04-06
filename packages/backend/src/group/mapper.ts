@@ -1,5 +1,5 @@
 import type { Prisma } from "../../generated/client";
-import { groupDetailSchema } from "./schema";
+import { groupBrowseSchema, groupDetailSchema } from "./schema";
 
 type GroupWithCounts = Prisma.GroupGetPayload<{
   include: {
@@ -14,6 +14,17 @@ type GroupWithCounts = Prisma.GroupGetPayload<{
 }>;
 
 export const groupMapper = {
+  toGroupBrowse(group: GroupWithCounts) {
+    return groupBrowseSchema.parse({
+      id: group.id,
+      createdAt: group.createdAt.toISOString(),
+      name: group.name,
+      shortcut: group.shortcut,
+      studentsCount: group._count.studentGroups,
+      trainingsCount: group._count.trainings,
+    });
+  },
+
   toGroupDetail(group: GroupWithCounts) {
     return groupDetailSchema.parse({
       id: group.id,

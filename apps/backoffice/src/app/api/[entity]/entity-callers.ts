@@ -4,6 +4,7 @@ import {
   tkdPortalLogUpdateSchema,
 } from "@repo/backend/tkd-portal-log/schema";
 
+import { groupCaller } from "@/modules/group/server/caller";
 import { helpdeskTicketCaller } from "@/modules/helpdesk-ticket/server/caller";
 import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
 
@@ -16,6 +17,10 @@ import {
 } from "./callers";
 
 const entityCallers: Record<string, EntityCaller> = {
+  group: {
+    ...createBrowseEntityCaller({ caller: groupCaller }),
+    ...createDetailEntityCaller({ caller: groupCaller }),
+  },
   helpdeskTicket: {
     ...createBrowseEntityCaller({ caller: helpdeskTicketCaller }),
     ...createDetailEntityCaller({ caller: helpdeskTicketCaller }),

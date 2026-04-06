@@ -10,7 +10,7 @@ export const paymentDetailSchema = z.object({
   parentSecondHalfId: z.string().nullable(),
   parentTeamId: z.string().nullable(),
   parentEventId: z.string().nullable(),
-  pendingPaymentsCount: z.number().int(),
+  pendingPaymentsCount: z.number(),
 });
 
 export type PaymentDetailType = z.infer<typeof paymentDetailSchema>;

@@ -1,7 +1,8 @@
 import { type PrimaryMenuItemType, isActive } from "iqf-web-ui/app-sidebar";
-import { Home, Logs, ShieldAlert } from "lucide-react";
+import { Home, Layers, Logs, ShieldAlert } from "lucide-react";
 import { useIntl } from "react-intl";
 
+import { groupConf } from "@/modules/group/conf";
 import { helpdeskTicketConf } from "@/modules/helpdesk-ticket/conf";
 import { tkdPortalLogConf } from "@/modules/tkd-portal-log/conf";
 
@@ -32,6 +33,18 @@ export function usePrimaryItems(): PrimaryMenuItemType[] {
       },
       align: "top",
       isActive: (href) => isActive([helpdeskTicketConf.url], href),
+    },
+    {
+      label: intl.formatMessage({
+        id: "sidebar.primary-items.group",
+        defaultMessage: "Skupiny",
+      }),
+      href: groupConf.url,
+      icon: {
+        Icon: Layers,
+      },
+      align: "bottom",
+      isActive: (href) => isActive([groupConf.url], href),
     },
     {
       label: intl.formatMessage({
