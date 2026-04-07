@@ -6,6 +6,7 @@ import {
   tkdPortalLogUpdateSchema,
 } from "@repo/backend/tkd-portal-log/schema";
 
+import { studentCandidateCaller } from "@/modules/student-candidate/server/caller";
 import { groupRegularTrainingCaller } from "@/modules/group-regular-training/server/caller";
 import { groupCaller } from "@/modules/group/server/caller";
 import { helpdeskTicketCaller } from "@/modules/helpdesk-ticket/server/caller";
@@ -42,6 +43,10 @@ const entityCallers: Record<string, EntityCaller> = {
       schema: helpdeskTicketUpdateSchema,
       caller: helpdeskTicketCaller,
     }),
+  },
+  studentCandidate: {
+    ...createBrowseEntityCaller({ caller: studentCandidateCaller }),
+    ...createDetailEntityCaller({ caller: studentCandidateCaller }),
   },
   tkdPortalLog: {
     ...createBrowseEntityCaller({ caller: tkdPortalLogCaller }),

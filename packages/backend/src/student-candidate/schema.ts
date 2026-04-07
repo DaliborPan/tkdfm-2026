@@ -1,5 +1,18 @@
 import { z } from "zod";
 
+export const studentCandidateBrowseSchema = z.object({
+  id: z.string(),
+  createdAt: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  nationalId: z.string(),
+  active: z.string(),
+});
+
+export type StudentCandidateBrowseType = z.infer<
+  typeof studentCandidateBrowseSchema
+>;
+
 export const studentCandidateDetailSchema = z.object({
   id: z.string(),
   createdAt: z.string(),

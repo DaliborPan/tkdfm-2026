@@ -25,6 +25,8 @@
     "./pending-payment-payment": "./src/pending-payment-payment/index.ts",
     "./payment": "./src/payment/index.ts",
     "./student": "./src/student/index.ts",
+    "./student-candidate/schema": "./src/student-candidate/schema.ts",
+    "./student-candidate/service": "./src/student-candidate/service.ts",
     "./student-candidate": "./src/student-candidate/index.ts",
     "./student-group": "./src/student-group/index.ts",
     "./tkd-portal-log/schema": "./src/tkd-portal-log/schema.ts",

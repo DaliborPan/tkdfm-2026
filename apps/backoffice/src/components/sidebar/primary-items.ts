@@ -1,9 +1,10 @@
 import { type PrimaryMenuItemType, isActive } from "iqf-web-ui/app-sidebar";
-import { Home, Layers, Logs, ShieldAlert } from "lucide-react";
+import { Home, Layers, Logs, ShieldAlert, UserRoundPlus } from "lucide-react";
 import { useIntl } from "react-intl";
 
 import { groupConf } from "@/modules/group/conf";
 import { helpdeskTicketConf } from "@/modules/helpdesk-ticket/conf";
+import { studentCandidateConf } from "@/modules/student-candidate/conf";
 import { tkdPortalLogConf } from "@/modules/tkd-portal-log/conf";
 
 export function usePrimaryItems(): PrimaryMenuItemType[] {
@@ -45,6 +46,18 @@ export function usePrimaryItems(): PrimaryMenuItemType[] {
       },
       align: "bottom",
       isActive: (href) => isActive([groupConf.url], href),
+    },
+    {
+      label: intl.formatMessage({
+        id: "sidebar.primary-items.student-candidate",
+        defaultMessage: "Import členů",
+      }),
+      href: studentCandidateConf.url,
+      icon: {
+        Icon: UserRoundPlus,
+      },
+      align: "bottom",
+      isActive: (href) => isActive([studentCandidateConf.url], href),
     },
     {
       label: intl.formatMessage({
