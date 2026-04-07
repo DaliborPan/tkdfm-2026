@@ -8,7 +8,7 @@ export const trainingDetailSchema = z.object({
   cancelled: z.string(),
   regular: z.boolean(),
   groupId: z.string(),
-  attendancesCount: z.number().int(),
+  attendancesCount: z.number(),
 });
 
 export type TrainingDetailType = z.infer<typeof trainingDetailSchema>;

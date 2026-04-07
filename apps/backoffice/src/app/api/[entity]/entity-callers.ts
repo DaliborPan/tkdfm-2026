@@ -1,9 +1,13 @@
+import { groupRegularTrainingCreateSchema } from "@repo/backend/group-regular-training/schema";
+import { groupUpdateSchema } from "@repo/backend/group/schema";
 import { helpdeskTicketUpdateSchema } from "@repo/backend/helpdesk-ticket/schema";
 import {
   tkdPortalLogCreateSchema,
   tkdPortalLogUpdateSchema,
 } from "@repo/backend/tkd-portal-log/schema";
 
+import { groupRegularTrainingCaller } from "@/modules/group-regular-training/server/caller";
+import { groupCaller } from "@/modules/group/server/caller";
 import { helpdeskTicketCaller } from "@/modules/helpdesk-ticket/server/caller";
 import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
 
@@ -16,6 +20,21 @@ import {
 } from "./callers";
 
 const entityCallers: Record<string, EntityCaller> = {
+  group: {
+    ...createBrowseEntityCaller({ caller: groupCaller }),
+    ...createDetailEntityCaller({ caller: groupCaller }),
+    ...createUpdateEntityCaller({
+      schema: groupUpdateSchema,
+      caller: groupCaller,
+    }),
+  },
+  groupRegularTraining: {
+    ...createBrowseEntityCaller({ caller: groupRegularTrainingCaller }),
+    ...createCreateEntityCaller({
+      schema: groupRegularTrainingCreateSchema,
+      caller: groupRegularTrainingCaller,
+    }),
+  },
   helpdeskTicket: {
     ...createBrowseEntityCaller({ caller: helpdeskTicketCaller }),
     ...createDetailEntityCaller({ caller: helpdeskTicketCaller }),

@@ -11,7 +11,7 @@ export const pendingPaymentDetailSchema = z.object({
   connectedPaymentType: z.string(),
   processed: z.boolean(),
   internalNote: z.string(),
-  paymentsCount: z.number().int(),
+  paymentsCount: z.number(),
 });
 
 export type PendingPaymentDetailType = z.infer<

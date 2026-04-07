@@ -20,6 +20,7 @@
 
 - When adding a new backend module, add only `findAll()` by default.
 - Add other repository and service query methods only when explicitly requested.
+- In backend repositories, do not import local schema DTO types for Prisma writes. Use Prisma-generated input types such as `Prisma.<Model>CreateInput` and `Prisma.<Model>UpdateInput`.
 
 ## Service Layer And App Callers
 
