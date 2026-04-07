@@ -6,7 +6,6 @@ import { validateTrainer } from "../utils/validation";
 import { groupRegularTrainingMapper } from "./mapper";
 import { groupRegularTrainingRepository } from "./repository";
 import {
-  type GroupRegularTrainingBrowseType,
   type GroupRegularTrainingCreateType,
   type GroupRegularTrainingDetailType,
 } from "./schema";
@@ -33,7 +32,7 @@ const create: EntityServiceCreateType<
 };
 
 const browse: EntityServiceBrowseType<{
-  items: GroupRegularTrainingBrowseType[];
+  items: GroupRegularTrainingDetailType[];
   totalCount: number;
 }> = async ({ input, currentUser }) => {
   validateTrainer(currentUser);
@@ -41,7 +40,9 @@ const browse: EntityServiceBrowseType<{
   const result = await groupRegularTrainingRepository.browse(input);
 
   return {
-    items: result.items.map(groupRegularTrainingMapper.toGroupRegularTrainingDetail),
+    items: result.items.map(
+      groupRegularTrainingMapper.toGroupRegularTrainingDetail,
+    ),
     totalCount: result.totalCount,
   };
 };

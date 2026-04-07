@@ -8,8 +8,8 @@ import { TextLayoutValue } from "iqf-web-ui/text-layout-value";
 
 import { useBrowseDataQuery } from "@repo/admin-ui/browse-data-query";
 import {
-  type GroupRegularTrainingBrowseType,
-  groupRegularTrainingBrowseSchema,
+  type GroupRegularTrainingDetailType,
+  groupRegularTrainingDetailSchema,
 } from "@repo/backend/group-regular-training/schema";
 
 import { groupRegularTrainingConf } from "../group-regular-training/conf";
@@ -20,7 +20,7 @@ import { useGroupFormContext } from "./hooks/form-context";
 function GroupRegularTrainingCard({
   groupRegularTraining,
 }: {
-  groupRegularTraining: GroupRegularTrainingBrowseType;
+  groupRegularTraining: GroupRegularTrainingDetailType;
 }) {
   return (
     <LayoutGroup>
@@ -53,7 +53,7 @@ export function GroupRegularTraining() {
   const query = useBrowseDataQuery({
     queryKey: [groupRegularTrainingConf.api],
     api: groupRegularTrainingConf.api,
-    schema: groupRegularTrainingBrowseSchema,
+    schema: groupRegularTrainingDetailSchema,
     options: {
       filters: entity
         ? [
