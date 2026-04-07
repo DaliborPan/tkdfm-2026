@@ -7,7 +7,6 @@ type GroupWithCounts = Prisma.GroupGetPayload<{
       select: {
         studentGroups: true;
         groupRegularTrainings: true;
-        trainings: true;
       };
     };
   };
@@ -21,7 +20,6 @@ export const groupMapper = {
       name: group.name,
       shortcut: group.shortcut,
       studentsCount: group._count.studentGroups,
-      trainingsCount: group._count.trainings,
     });
   },
 
@@ -35,7 +33,6 @@ export const groupMapper = {
       color: group.color,
       studentsCount: group._count.studentGroups,
       regularTrainingsCount: group._count.groupRegularTrainings,
-      trainingsCount: group._count.trainings,
     });
   },
 };

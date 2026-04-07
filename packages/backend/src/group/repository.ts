@@ -13,7 +13,6 @@ const includeCounts = {
     select: {
       studentGroups: true,
       groupRegularTrainings: true,
-      trainings: true,
     },
   },
 } as const;

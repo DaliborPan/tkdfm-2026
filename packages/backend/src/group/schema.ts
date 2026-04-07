@@ -6,7 +6,6 @@ export const groupBrowseSchema = z.object({
   name: z.string(),
   shortcut: z.string(),
   studentsCount: z.number(),
-  trainingsCount: z.number(),
 });
 
 export type GroupBrowseType = z.infer<typeof groupBrowseSchema>;
@@ -30,7 +29,6 @@ export const groupDetailSchema = z.object({
   color: z.string(),
   studentsCount: z.number(),
   regularTrainingsCount: z.number(),
-  trainingsCount: z.number(),
 });
 
 export type GroupDetailType = z.infer<typeof groupDetailSchema>;

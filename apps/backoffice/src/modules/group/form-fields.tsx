@@ -26,11 +26,6 @@ function BaseInfo() {
           name="regularTrainingsCount"
           label="Počet pravidelných tréninků"
         />
-        <TextLayoutField
-          readOnly={true}
-          name="trainingsCount"
-          label="Počet tréninků"
-        />
       </LayoutGroup>
     </div>
   );

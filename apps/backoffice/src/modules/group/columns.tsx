@@ -21,17 +21,5 @@ export const useColumns = () => {
     enableSorting: false,
   });
 
-  const trainingsCountColumn = tableColumn.number({
-    name: "trainingsCount",
-    label: "Počet tréninků",
-    enableFilter: false,
-    enableSorting: false,
-  });
-
-  return [
-    nameColumn,
-    shortcutColumn,
-    studentsCountColumn,
-    trainingsCountColumn,
-  ];
+  return [nameColumn, shortcutColumn, studentsCountColumn];
 };
