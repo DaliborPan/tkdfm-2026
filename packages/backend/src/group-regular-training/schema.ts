@@ -25,3 +25,17 @@ export const groupRegularTrainingDetailSchema = z.object({
 export type GroupRegularTrainingDetailType = z.infer<
   typeof groupRegularTrainingDetailSchema
 >;
+
+export const groupRegularTrainingBrowseSchema = groupRegularTrainingDetailSchema;
+
+export type GroupRegularTrainingBrowseType = z.infer<
+  typeof groupRegularTrainingBrowseSchema
+>;
+
+export const groupRegularTrainingListSchema = z.array(
+  groupRegularTrainingDetailSchema,
+);
+
+export type GroupRegularTrainingListType = z.infer<
+  typeof groupRegularTrainingListSchema
+>;

@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { groupRegularTrainingDetailSchema } from "../group-regular-training/schema";
-
 export const groupBrowseSchema = z.object({
   id: z.string(),
   createdAt: z.string(),
@@ -33,7 +31,6 @@ export const groupDetailSchema = z.object({
   studentsCount: z.number(),
   regularTrainingsCount: z.number(),
   trainingsCount: z.number(),
-  groupRegularTrainings: z.array(groupRegularTrainingDetailSchema),
 });
 
 export type GroupDetailType = z.infer<typeof groupDetailSchema>;

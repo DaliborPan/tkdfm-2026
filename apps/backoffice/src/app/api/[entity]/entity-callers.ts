@@ -29,6 +29,7 @@ const entityCallers: Record<string, EntityCaller> = {
     }),
   },
   groupRegularTraining: {
+    ...createBrowseEntityCaller({ caller: groupRegularTrainingCaller }),
     ...createCreateEntityCaller({
       schema: groupRegularTrainingCreateSchema,
       caller: groupRegularTrainingCaller,

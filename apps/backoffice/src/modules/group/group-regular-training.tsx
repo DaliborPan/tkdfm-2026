@@ -6,6 +6,13 @@ import { LayoutGroup } from "iqf-web-ui/form";
 import { SelectLayoutValue } from "iqf-web-ui/select-layout-value";
 import { TextLayoutValue } from "iqf-web-ui/text-layout-value";
 
+import { useBrowseDataQuery } from "@repo/admin-ui/browse-data-query";
+import {
+  type GroupRegularTrainingBrowseType,
+  groupRegularTrainingBrowseSchema,
+} from "@repo/backend/group-regular-training/schema";
+
+import { groupRegularTrainingConf } from "../group-regular-training/conf";
 import { AddGroupRegularTrainingAction } from "./actions/add-group-regular-training-action";
 import { dayOfWeekOptions } from "./day-of-week-options";
 import { useGroupFormContext } from "./hooks/form-context";
@@ -13,9 +20,7 @@ import { useGroupFormContext } from "./hooks/form-context";
 function GroupRegularTrainingCard({
   groupRegularTraining,
 }: {
-  groupRegularTraining: NonNullable<
-    ReturnType<typeof useGroupFormContext>["entity"]
-  >["groupRegularTrainings"][number];
+  groupRegularTraining: GroupRegularTrainingBrowseType;
 }) {
   return (
     <LayoutGroup>
@@ -45,9 +50,32 @@ function GroupRegularTrainingCard({
 export function GroupRegularTraining() {
   const { entity } = useGroupFormContext();
 
+  const query = useBrowseDataQuery({
+    queryKey: [groupRegularTrainingConf.api],
+    api: groupRegularTrainingConf.api,
+    schema: groupRegularTrainingBrowseSchema,
+    options: {
+      filters: entity
+        ? [
+            {
+              column: "TEXT",
+              name: "groupId",
+              value: [entity.id],
+            },
+          ]
+        : [],
+      sort: [],
+      take: 100,
+      skip: 0,
+    },
+    enabled: !!entity,
+  });
+
   if (!entity) {
     return null;
   }
+
+  const groupRegularTrainings = query.data?.items ?? [];
 
   return (
     <div className="flex flex-col gap-y-2 p-4">
@@ -56,7 +84,7 @@ export function GroupRegularTraining() {
           <span>Pravidelné tréninky</span>
 
           <Chip inverse={true} size="xs">
-            {entity.groupRegularTrainings.length}
+            {groupRegularTrainings.length}
           </Chip>
         </h3>
 
@@ -65,7 +93,7 @@ export function GroupRegularTraining() {
         </div>
       </div>
 
-      {entity.groupRegularTrainings.map((groupRegularTraining) => (
+      {groupRegularTrainings.map((groupRegularTraining) => (
         <GroupRegularTrainingCard
           key={groupRegularTraining.id}
           groupRegularTraining={groupRegularTraining}

@@ -1,8 +1,6 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Plus } from "lucide-react";
-
 import { apiFetch } from "iqf-web-ui/api-fetch";
 import { Button } from "iqf-web-ui/button";
 import { DateLayoutField } from "iqf-web-ui/date-layout-field";
@@ -10,6 +8,7 @@ import { LayoutGroup } from "iqf-web-ui/form";
 import { Prompt } from "iqf-web-ui/prompt";
 import { SimpleSelectLayoutField } from "iqf-web-ui/select-layout-field";
 import { successToast } from "iqf-web-ui/toast";
+import { Plus } from "lucide-react";
 
 import { groupRegularTrainingCreateSchema } from "@repo/backend/group-regular-training/schema";
 
@@ -41,11 +40,9 @@ export function AddGroupRegularTrainingAction() {
     onSuccess: async () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [groupConf.api] }),
-        entity
-          ? queryClient.invalidateQueries({
-              queryKey: [groupConf.api, entity.id],
-            })
-          : Promise.resolve(),
+        queryClient.invalidateQueries({
+          queryKey: [groupRegularTrainingConf.api],
+        }),
       ]);
     },
   });
@@ -68,6 +65,7 @@ export function AddGroupRegularTrainingAction() {
         }
 
         await mutation.mutateAsync(data);
+
         successToast("Pravidelný trénink byl úspěšně přidán.");
       }}
       content={
