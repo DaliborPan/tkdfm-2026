@@ -6,16 +6,13 @@ import { LayoutGroup } from "iqf-web-ui/form";
 import { SelectLayoutValue } from "iqf-web-ui/select-layout-value";
 import { TextLayoutValue } from "iqf-web-ui/text-layout-value";
 
-import { useBrowseDataQuery } from "@repo/admin-ui/browse-data-query";
-import {
-  type GroupRegularTrainingDetailType,
-  groupRegularTrainingDetailSchema,
-} from "@repo/backend/group-regular-training/schema";
+import { type GroupRegularTrainingDetailType } from "@repo/backend/group-regular-training/schema";
 
-import { groupRegularTrainingConf } from "../group-regular-training/conf";
-import { AddGroupRegularTrainingAction } from "./actions/add-group-regular-training-action";
-import { dayOfWeekOptions } from "./day-of-week-options";
-import { useGroupFormContext } from "./hooks/form-context";
+import { useGroupRegularTrainingBrowseQuery } from "@/modules/group-regular-training/hooks/api";
+
+import { dayOfWeekOptions } from "../../day-of-week/options";
+import { AddGroupRegularTrainingAction } from "../actions/add-group-regular-training-action";
+import { useGroupFormContext } from "../hooks/form-context";
 
 function GroupRegularTrainingCard({
   groupRegularTraining,
@@ -50,30 +47,7 @@ function GroupRegularTrainingCard({
 export function GroupRegularTraining() {
   const { entity } = useGroupFormContext();
 
-  const query = useBrowseDataQuery({
-    queryKey: [groupRegularTrainingConf.api],
-    api: groupRegularTrainingConf.api,
-    schema: groupRegularTrainingDetailSchema,
-    options: {
-      filters: entity
-        ? [
-            {
-              column: "TEXT",
-              name: "groupId",
-              value: [entity.id],
-            },
-          ]
-        : [],
-      sort: [],
-      take: 100,
-      skip: 0,
-    },
-    enabled: !!entity,
-  });
-
-  if (!entity) {
-    return null;
-  }
+  const query = useGroupRegularTrainingBrowseQuery(entity?.id);
 
   const groupRegularTrainings = query.data?.items ?? [];
 

@@ -1,35 +1,7 @@
-import { LayoutGroup } from "iqf-web-ui/form";
-import { TextLayoutField } from "iqf-web-ui/text-layout-field";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "iqf-web-ui/tabs";
 
 import { useGroupFormContext } from "./hooks/form-context";
-import { GroupRegularTraining } from "./group-regular-training";
-
-function BaseInfo() {
-  return (
-    <div className="flex flex-col gap-y-4 p-4">
-      <LayoutGroup title="Základní informace">
-        <TextLayoutField name="name" label="Název" />
-        <TextLayoutField name="shortcut" label="Zkratka" />
-        <TextLayoutField name="location" label="Lokalita" />
-        <TextLayoutField name="color" label="Barva" />
-      </LayoutGroup>
-
-      <LayoutGroup title="Souhrn">
-        <TextLayoutField
-          readOnly={true}
-          name="studentsCount"
-          label="Počet studentů"
-        />
-        <TextLayoutField
-          readOnly={true}
-          name="regularTrainingsCount"
-          label="Počet pravidelných tréninků"
-        />
-      </LayoutGroup>
-    </div>
-  );
-}
+import { GroupTabs } from "./tabs/tabs";
 
 export function FormFields() {
   const { isEditing } = useGroupFormContext();
@@ -44,11 +16,11 @@ export function FormFields() {
       </TabsList>
 
       <TabsContent value="base-info">
-        <BaseInfo />
+        <GroupTabs.BaseInfo />
       </TabsContent>
 
       <TabsContent value="group-regular-training">
-        <GroupRegularTraining />
+        <GroupTabs.GroupRegularTraining />
       </TabsContent>
     </Tabs>
   );

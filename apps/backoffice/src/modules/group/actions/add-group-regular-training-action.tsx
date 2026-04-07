@@ -12,10 +12,10 @@ import { Plus } from "lucide-react";
 
 import { groupRegularTrainingCreateSchema } from "@repo/backend/group-regular-training/schema";
 
+import { dayOfWeekOptions } from "@/modules/day-of-week/options";
 import { groupRegularTrainingConf } from "@/modules/group-regular-training/conf";
 
 import { groupConf } from "../conf";
-import { dayOfWeekOptions } from "../day-of-week-options";
 import { useGroupFormContext } from "../hooks/form-context";
 
 const defaultValues = {
