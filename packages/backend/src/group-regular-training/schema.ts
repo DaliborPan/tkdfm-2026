@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+export const groupRegularTrainingCreateSchema = z.object({
+  dayOfWeek: z.string(),
+  startsAt: z.string(),
+  endsAt: z.string(),
+  note: z.string(),
+  groupId: z.string(),
+});
+
+export type GroupRegularTrainingCreateType = z.infer<
+  typeof groupRegularTrainingCreateSchema
+>;
+
 export const groupRegularTrainingDetailSchema = z.object({
   id: z.string(),
   createdAt: z.string(),

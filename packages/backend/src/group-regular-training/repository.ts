@@ -1,6 +1,13 @@
+import { type Prisma } from "../../generated/client";
 import { prisma } from "../client";
 
 export const groupRegularTrainingRepository = {
+  async create(data: Prisma.GroupRegularTrainingCreateInput) {
+    return prisma.groupRegularTraining.create({
+      data,
+    });
+  },
+
   async findAll() {
     return prisma.groupRegularTraining.findMany({
       orderBy: [

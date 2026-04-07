@@ -1,7 +1,36 @@
+import { type EntityServiceCreateType } from "../types";
+import { validateTrainer } from "../utils/validation";
 import { groupRegularTrainingMapper } from "./mapper";
 import { groupRegularTrainingRepository } from "./repository";
+import {
+  type GroupRegularTrainingCreateType,
+  type GroupRegularTrainingDetailType,
+} from "./schema";
+
+const create: EntityServiceCreateType<
+  GroupRegularTrainingCreateType,
+  GroupRegularTrainingDetailType
+> = async ({ input, currentUser }) => {
+  validateTrainer(currentUser);
+
+  const row = await groupRegularTrainingRepository.create({
+    dayOfWeek: input.dayOfWeek,
+    startsAt: input.startsAt,
+    endsAt: input.endsAt,
+    note: input.note,
+    group: {
+      connect: {
+        id: input.groupId,
+      },
+    },
+  });
+
+  return groupRegularTrainingMapper.toGroupRegularTrainingDetail(row);
+};
 
 export const groupRegularTrainingService = {
+  create,
+
   async findAll() {
     const rows = await groupRegularTrainingRepository.findAll();
     return rows.map(groupRegularTrainingMapper.toGroupRegularTrainingDetail);

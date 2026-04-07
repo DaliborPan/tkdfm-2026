@@ -1,3 +1,4 @@
+import { groupRegularTrainingCreateSchema } from "@repo/backend/group-regular-training/schema";
 import { groupUpdateSchema } from "@repo/backend/group/schema";
 import { helpdeskTicketUpdateSchema } from "@repo/backend/helpdesk-ticket/schema";
 import {
@@ -5,6 +6,7 @@ import {
   tkdPortalLogUpdateSchema,
 } from "@repo/backend/tkd-portal-log/schema";
 
+import { groupRegularTrainingCaller } from "@/modules/group-regular-training/server/caller";
 import { groupCaller } from "@/modules/group/server/caller";
 import { helpdeskTicketCaller } from "@/modules/helpdesk-ticket/server/caller";
 import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
@@ -24,6 +26,12 @@ const entityCallers: Record<string, EntityCaller> = {
     ...createUpdateEntityCaller({
       schema: groupUpdateSchema,
       caller: groupCaller,
+    }),
+  },
+  groupRegularTraining: {
+    ...createCreateEntityCaller({
+      schema: groupRegularTrainingCreateSchema,
+      caller: groupRegularTrainingCaller,
     }),
   },
   helpdeskTicket: {

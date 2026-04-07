@@ -18,6 +18,19 @@ const includeCounts = {
   },
 } as const;
 
+const groupRegularTrainingOrderBy: Prisma.GroupRegularTrainingOrderByWithRelationInput[] = [
+  { dayOfWeek: "asc" },
+  { startsAt: "asc" },
+  { createdAt: "asc" },
+];
+
+const includeDetails = {
+  ...includeCounts,
+  groupRegularTrainings: {
+    orderBy: groupRegularTrainingOrderBy,
+  },
+} as const;
+
 export const groupRepository = {
   async browse({ filters, sort, skip, take }: BrowseBodyType) {
     const where = createWhereObject(filters);
@@ -43,7 +56,7 @@ export const groupRepository = {
       where: {
         id,
       },
-      include: includeCounts,
+      include: includeDetails,
     });
   },
 
@@ -53,13 +66,13 @@ export const groupRepository = {
         id,
       },
       data,
-      include: includeCounts,
+      include: includeDetails,
     });
   },
 
   async findAll() {
     return prisma.group.findMany({
-      include: includeCounts,
+      include: includeDetails,
       orderBy: [{ name: "asc" }, { shortcut: "asc" }, { createdAt: "asc" }],
     });
   },

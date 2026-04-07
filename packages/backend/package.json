@@ -14,6 +14,8 @@
     "./group/schema": "./src/group/schema.ts",
     "./group/service": "./src/group/service.ts",
     "./group-regular-training": "./src/group-regular-training/index.ts",
+    "./group-regular-training/schema": "./src/group-regular-training/schema.ts",
+    "./group-regular-training/service": "./src/group-regular-training/service.ts",
     "./helpdesk-ticket/schema": "./src/helpdesk-ticket/schema.ts",
     "./helpdesk-ticket/service": "./src/helpdesk-ticket/service.ts",
     "./helpdesk-ticket": "./src/helpdesk-ticket/index.ts",
