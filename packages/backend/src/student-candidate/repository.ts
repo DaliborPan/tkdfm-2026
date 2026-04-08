@@ -16,7 +16,11 @@ export const studentCandidateRepository = {
   },
 
   async browse({ filters, sort, skip, take }: BrowseBodyType) {
-    const where = createWhereObject(filters);
+    const where = createWhereObject(filters, {
+      custom: {
+        deleted: "",
+      },
+    });
     const orderBy = createOrderByObject(sort);
     const pagination = createPaginationObject({ skip, take });
 
