@@ -14,6 +14,7 @@ export const getAccessToken = async () => {
       Accept: "application/json",
     },
     body: new URLSearchParams({
+      grant_type: "client_credentials",
       scope: "personal_data",
     }),
   });

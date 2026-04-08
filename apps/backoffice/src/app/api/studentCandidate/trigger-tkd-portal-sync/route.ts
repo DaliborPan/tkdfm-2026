@@ -6,7 +6,7 @@ export const POST = async (_req: NextRequest) => {
   try {
     await studentCandidateCaller.importTeamMembers();
 
-    return Response.json(null, { status: 204 });
+    return Response.json(null);
   } catch (error) {
     if (error instanceof Error) {
       return Response.json({ error: error.message }, { status: 400 });
