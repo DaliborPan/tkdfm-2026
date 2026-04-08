@@ -84,6 +84,11 @@ export const studentCandidateService = {
   update,
   createStudentFromCandidate,
 
+  async create(data: Parameters<typeof studentCandidateRepository.create>[0]) {
+    const row = await studentCandidateRepository.create(data);
+    return studentCandidateMapper.toStudentCandidateDetail(row);
+  },
+
   async findAll() {
     const rows = await studentCandidateRepository.findAll();
     return rows.map(studentCandidateMapper.toStudentCandidateDetail);

@@ -9,6 +9,12 @@ import {
 } from "../utils";
 
 export const tkdPortalLogRepository = {
+  async createMany(data: Prisma.TkdPortalLogCreateManyInput[]) {
+    return prisma.tkdPortalLog.createMany({
+      data,
+    });
+  },
+
   async create(data: Prisma.TkdPortalLogCreateInput) {
     return prisma.tkdPortalLog.create({
       data,

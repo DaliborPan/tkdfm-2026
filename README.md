@@ -187,6 +187,101 @@ Your app will be running at `http://localhost:3000`. Open it in your browser to 
 
 You can also read the official [detailed step-by-step guide from Prisma ORM](https://pris.ly/guide/turborepo?utm_campaign=turborepo-example) to build a project from scratch using Turborepo and Prisma ORM.
 
+## Import kandidátů ze svazu
+
+Import kandidátů ze svazu je v backoffice dostupný v evidenci `student-candidate` přes akci `Nahrát nejnovější data ze svazu`.
+
+### UI flow
+
+- Akce je v toolbaru tabulky `Import členů ze svazu`.
+- Po kliknutí se otevře potvrzovací dialog s textem `Opravdu chcete nahrát nejnovější data ze svazu?`.
+- Po potvrzení se zavolá endpoint `POST /api/studentCandidate/trigger-tkd-portal-sync`.
+- Po úspěchu se zobrazí toast `Data byla úspěšně nahrána`.
+- Následně se invaliduje evidence `student-candidate` a `student`.
+
+### Server-side sekvence
+
+Import use-case je implementovaný v `packages/backend/src/tkd-portal/service.ts` a zachovává stejnou sekvenci jako původní Turbo aplikace:
+
+1. získá access token do portálu svazu
+2. stáhne aktuální seznam členů klubu z externího API
+3. načte všechny existující studenty z databáze
+4. aktualizuje existující studenty, pokud se data liší
+5. vytvoří nové `student-candidate` záznamy pro členy, kteří ještě nejsou ani studenti, ani kandidáti
+
+### Externí API
+
+- Base URL: `https://portal.taekwondo.cz/v2`
+- Token endpoint: `/access/access-token`
+- Team members endpoint: `/member/club-members`
+
+Potřebné proměnné prostředí:
+
+- `TKD_PORTAL_CLIENT_ID`
+- `TKD_PORTAL_CLIENT_SECRET`
+
+### Co se při importu děje v databázi
+
+#### 1. Aktualizace existujících studentů
+
+Pro každého člena ze svazu se hledá odpovídající student:
+
+- primárně podle `nationalId`
+- speciální fallback je podle `tkdid + firstName + lastName + birthDate`, pokud student používá `tkdid` jako náhradní identifikátor
+
+Pokud se najde existující student s parentem:
+
+- porovnají se importovaná pole proti lokálním datům
+- při rozdílu se vytvoří záznamy v `tkd-portal-log`
+- pokud vznikl alespoň jeden log, student a jeho parent data se aktualizují
+
+Porovnávaná pole:
+
+- `tkdid`
+- `firstName`
+- `lastName`
+- `importActive`
+- `technicalGrade`
+- `technicalGradeStart`
+- `parent.phoneNumber`
+- `parent.email`
+- `parent.street`
+- `parent.streetNumber`
+- `parent.city`
+- `parent.registered`
+
+#### 2. Vytvoření nových kandidátů
+
+Pokud člen ze svazu:
+
+- neodpovídá žádnému existujícímu studentovi
+- a zároveň ještě neexistuje v `student-candidate` podle `nationalId`
+
+tak se provede:
+
+- vytvoření `CREATE` záznamu do `tkd-portal-log`
+- vytvoření nového `student-candidate`
+
+### Mapování dat z TKD portálu
+
+Při transformaci vstupních dat se zachovává logika z Turbo:
+
+- neaktivní členové (`active === "inactive"`) se vůbec neimportují
+- `birth_number` fallbackuje na `id`, pokud chybí
+- telefon a email se skládají z hlavního a odpovědné osoby; pokud se liší, spojí se do jednoho řetězce odděleného čárkou
+- technické stupně `1 dan` až `9 dan` se převádějí na interní formát jako `I. dan`, `II. dan`, ...
+
+### Důležitá poznámka
+
+Tento import je záměrně implementovaný s 1:1 paritou vůči Turbo aplikaci. Při úpravách je potřeba zachovat:
+
+- stejné UI textace
+- stejný confirm flow
+- stejnou sekvenci kroků importu
+- stejná porovnávaná pole
+- stejné vytváření `tkd-portal-log` záznamů
+- stejné invalidace dat po dokončení
+
 ## Useful Links
 
 Learn more about the power of Turborepo:

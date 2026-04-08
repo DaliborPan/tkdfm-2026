@@ -1,4 +1,6 @@
+import { type StudentCandidateCreateStudentType } from "@repo/backend/student-candidate/schema";
 import { studentCandidateService } from "@repo/backend/student-candidate/service";
+import { tkdPortalService } from "@repo/backend/tkd-portal/service";
 
 import {
   createBrowseCaller,
@@ -13,7 +15,7 @@ export const studentCandidateCaller = {
   ...createUpdateCaller(studentCandidateService),
 
   createStudentFromCandidate: async (
-    input: Parameters<typeof studentCandidateService.createStudentFromCandidate>[0]["input"],
+    input: StudentCandidateCreateStudentType,
   ) => {
     const { currentUser } = await getRequestContext();
 
@@ -21,5 +23,11 @@ export const studentCandidateCaller = {
       input,
       currentUser,
     });
+  },
+
+  importTeamMembers: async () => {
+    const { currentUser } = await getRequestContext();
+
+    await tkdPortalService.importTeamMembers({ currentUser });
   },
 };

@@ -6,6 +6,7 @@ import { Evidence } from "@repo/admin-ui/evidence";
 import { studentCandidateBrowseSchema } from "@repo/backend/student-candidate/schema";
 
 import { useColumns } from "./columns";
+import { TableToolbar } from "./components/table-toolbar";
 import { studentCandidateConf } from "./conf";
 
 export function StudentCandidateEvidence({ children }: PropsWithChildren) {
@@ -22,6 +23,7 @@ export function StudentCandidateEvidence({ children }: PropsWithChildren) {
           tableCaption={{
             showSearch: false,
             showNew: false,
+            toolbar: <TableToolbar />,
           }}
         />
       }

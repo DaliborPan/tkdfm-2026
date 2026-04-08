@@ -1,4 +1,4 @@
-import { type StudentCandidate } from "../../generated/client";
+import { type Prisma, type StudentCandidate } from "../../generated/client";
 import { prisma } from "../client";
 
 export const studentRepository = {
@@ -25,6 +25,18 @@ export const studentRepository = {
             registered: candidate.registered,
           },
         },
+      },
+    });
+  },
+
+  async update(id: string, data: Prisma.StudentUpdateInput) {
+    return prisma.student.update({
+      where: {
+        id,
+      },
+      data,
+      include: {
+        parent: true,
       },
     });
   },

@@ -9,6 +9,12 @@ import {
 } from "../utils";
 
 export const studentCandidateRepository = {
+  async create(data: Prisma.StudentCandidateCreateInput) {
+    return prisma.studentCandidate.create({
+      data,
+    });
+  },
+
   async browse({ filters, sort, skip, take }: BrowseBodyType) {
     const where = createWhereObject(filters);
     const orderBy = createOrderByObject(sort);
