@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiFetch } from "iqf-web-ui/api-fetch";
 import { Button } from "iqf-web-ui/button";
@@ -34,6 +36,7 @@ export function SoftDeleteAction({
 }: {
   studentCandidateId: string;
 }) {
+  const router = useRouter();
   const mutation = useSoftDeleteMutation(studentCandidateId);
 
   return (
@@ -45,6 +48,8 @@ export function SoftDeleteAction({
         }
 
         await mutation.mutateAsync();
+
+        router.replace(studentCandidateConf.url);
 
         successToast("Člověk byl označen za smazaného.");
       }}
