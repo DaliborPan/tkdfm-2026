@@ -13,6 +13,23 @@ export type StudentCandidateBrowseType = z.infer<
   typeof studentCandidateBrowseSchema
 >;
 
+export const studentCandidateCreateStudentSchema = z.object({
+  candidateId: z.string(),
+  groupId: z.string(),
+});
+
+export type StudentCandidateCreateStudentType = z.infer<
+  typeof studentCandidateCreateStudentSchema
+>;
+
+export const studentCandidateUpdateSchema = z.object({
+  deleted: z.string(),
+});
+
+export type StudentCandidateUpdateType = z.infer<
+  typeof studentCandidateUpdateSchema
+>;
+
 export const studentCandidateDetailSchema = z.object({
   id: z.string(),
   createdAt: z.string(),

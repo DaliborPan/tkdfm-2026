@@ -1,6 +1,7 @@
 import { groupRegularTrainingCreateSchema } from "@repo/backend/group-regular-training/schema";
 import { groupUpdateSchema } from "@repo/backend/group/schema";
 import { helpdeskTicketUpdateSchema } from "@repo/backend/helpdesk-ticket/schema";
+import { studentCandidateUpdateSchema } from "@repo/backend/student-candidate/schema";
 import {
   tkdPortalLogCreateSchema,
   tkdPortalLogUpdateSchema,
@@ -47,6 +48,10 @@ const entityCallers: Record<string, EntityCaller> = {
   studentCandidate: {
     ...createBrowseEntityCaller({ caller: studentCandidateCaller }),
     ...createDetailEntityCaller({ caller: studentCandidateCaller }),
+    ...createUpdateEntityCaller({
+      schema: studentCandidateUpdateSchema,
+      caller: studentCandidateCaller,
+    }),
   },
   tkdPortalLog: {
     ...createBrowseEntityCaller({ caller: tkdPortalLogCaller }),

@@ -3,6 +3,7 @@
 import { Evidence } from "@repo/admin-ui/evidence";
 import { studentCandidateDetailSchema } from "@repo/backend/student-candidate/schema";
 
+import { FormToolbar } from "./components/form-toolbar";
 import { FormFields } from "./form-fields";
 
 export function StudentCandidateDetail() {
@@ -12,6 +13,7 @@ export function StudentCandidateDetail() {
       formSchema={studentCandidateDetailSchema}
       detailSchema={studentCandidateDetailSchema}
       titleMapper={(data) => `${data.firstName} ${data.lastName}`}
+      toolbar={<FormToolbar />}
     >
       <FormFields />
     </Evidence.Detail>

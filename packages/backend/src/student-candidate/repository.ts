@@ -1,3 +1,4 @@
+import { type Prisma } from "../../generated/client";
 import { createBrowseResult } from "../repository/utils/browse";
 import { prisma } from "../client";
 import {
@@ -28,6 +29,23 @@ export const studentCandidateRepository = {
 
   async get(id: string) {
     return prisma.studentCandidate.findUnique({
+      where: {
+        id,
+      },
+    });
+  },
+
+  async update(id: string, data: Prisma.StudentCandidateUpdateInput) {
+    return prisma.studentCandidate.update({
+      where: {
+        id,
+      },
+      data,
+    });
+  },
+
+  async delete(id: string) {
+    return prisma.studentCandidate.delete({
       where: {
         id,
       },
