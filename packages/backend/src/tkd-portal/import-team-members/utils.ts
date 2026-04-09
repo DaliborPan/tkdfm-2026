@@ -1,0 +1,20 @@
+import { type Prisma } from "../../../generated/client";
+import { type TeamMemberType } from "../schema";
+
+/**
+ * Compare existing `Student` and imported `TeamMember`. Normally,
+ * we compare based on `nationalId`.
+ *
+ * Special case for students, that don't have their own nationalId.
+ * - If `Student` has the same `tkdid` as `nationalId`,
+ * compare `firstName`, `lastName` and `birthDate`.
+ */
+export const compareStudentAndMember = (
+  member: TeamMemberType,
+  student: Prisma.StudentGetPayload<{ include: { parent: true } }>,
+) =>
+  student.parent?.nationalId === member.nationalId ||
+  (student.tkdid === student.parent?.nationalId &&
+    student.firstName === member.firstName &&
+    student.lastName === member.lastName &&
+    student.parent?.birthDate === member.birthDate);

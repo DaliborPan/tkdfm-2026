@@ -5,7 +5,9 @@
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_URL",
     "DATABASE_URL",
-    "NEXT_PUBLIC_APP_URL"
+    "NEXT_PUBLIC_APP_URL",
+    "TKD_PORTAL_CLIENT_ID",
+    "TKD_PORTAL_CLIENT_SECRET"
   ],
   "tasks": {
     "build": {

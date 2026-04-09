@@ -36,6 +36,15 @@
 - Reuse request context through an app-level request-context helper so auth/session lookup is centralized and not repeated across every Server Component.
 - Generic API route registries should allow partial operation support and return `405 Method Not Allowed` when an entity exists but the requested operation is not implemented.
 
+## Migration Parity With Turbo
+
+- When migrating a module from Turbo, preserve not only the data flow but also the UI composition and behavior from the original module unless there is a clear reason to improve it.
+- For action toolbars migrated from Turbo, prefer matching the original toolbar composition instead of automatically adding default backoffice toolbar buttons.
+- When a backend operation represents a specific domain workflow, prefer a focused repository helper such as `createFromCandidate()` over rebuilding a large nested Prisma payload inline in the service.
+- For simple relation writes used by one workflow, prefer a narrow domain-shaped repository method signature over a broad generic nested Prisma object if it makes the intent clearer.
+- Do not introduce extra result DTO schemas or types for one-off internal action responses unless they provide real reuse or validation value.
+- For post-action navigation and invalidation, check Turbo behavior first; if Turbo redirects back to the evidence after completion, mirror that behavior in backoffice.
+
 ## iqf-web Packages
 
 - Do not modify `iqf-web-*` packages in this repository unless the user explicitly requests it.
