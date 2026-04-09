@@ -2,7 +2,7 @@ import { type Prisma } from "../../../generated/client";
 import { type TeamMemberType } from "../schema";
 
 /**
- * Compare existing `Student` a imported `TeamMember`. Normally,
+ * Compare existing `Student` and imported `TeamMember`. Normally,
  * we compare based on `nationalId`.
  *
  * Special case for students, that don't have their own nationalId.

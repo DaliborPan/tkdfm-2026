@@ -59,23 +59,35 @@ export const teamMembersSchema = z
   .transform((data) => {
     const activeMappedMembers = data.members
       .filter((member) => member.active !== "inactive")
-      .map((member) => ({
-        tkdid: member.id.toString(),
-        firstName: member.name,
-        lastName: member.surname,
-        gender: member.gender,
-        nationalId: member.birth_number ?? member.id.toString(),
-        birthDate: member.date_of_birth,
-        street: member.street,
-        streetNumber: member.street_number,
-        city: member.city,
-        phoneNumber: processContact(member.phone, member.responsible_person_phone),
-        email: processContact(member.email, member.responsible_person_email),
-        registered: member.registered,
-        technicalGrade: convertTechnicalGrade(member.technical_grade),
-        technicalGradeStart: member.technical_grade_start,
-        importActive: member.active,
-      }));
+      .map((member) => {
+        const tkdid = member.id.toString();
+
+        return {
+          tkdid,
+          firstName: member.name,
+          lastName: member.surname,
+          gender: member.gender,
+
+          /**
+           * If imported member does not have a birth number, use tkdid as nationalId.
+           * Foreign students don't have a birth number.
+           */
+          nationalId: member.birth_number ?? tkdid,
+          birthDate: member.date_of_birth,
+          street: member.street,
+          streetNumber: member.street_number,
+          city: member.city,
+          phoneNumber: processContact(
+            member.phone,
+            member.responsible_person_phone,
+          ),
+          email: processContact(member.email, member.responsible_person_email),
+          registered: member.registered,
+          technicalGrade: convertTechnicalGrade(member.technical_grade),
+          technicalGradeStart: member.technical_grade_start,
+          importActive: member.active,
+        };
+      });
 
     return {
       totalCount: activeMappedMembers.length,
