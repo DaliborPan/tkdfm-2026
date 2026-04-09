@@ -55,6 +55,8 @@ export const updateExistingStudents = async (
     const { count } = await createTkdPortalLogs({ student, member });
 
     if (count) {
+      console.log("Updating student... ", student.lastName);
+
       await studentRepository.update(
         student.id,
         prepareStudent(

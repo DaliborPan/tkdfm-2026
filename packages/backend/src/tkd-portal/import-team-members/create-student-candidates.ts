@@ -23,6 +23,12 @@ export const createStudentCandidates = async (
   );
 
   for (const member of nonExistingTkdPortalMembers) {
+    console.log(
+      "Creating student candidate... ",
+      member.lastName,
+      member.nationalId,
+    );
+
     await tkdPortalLogRepository.create({
       type: "CREATE",
       nationalId: member.nationalId,
