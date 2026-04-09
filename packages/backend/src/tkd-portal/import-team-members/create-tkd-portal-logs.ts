@@ -1,4 +1,4 @@
-import { type StudentDetailType } from "../../student";
+import { type Prisma } from "../../../generated/client";
 import { tkdPortalLogRepository } from "../../tkd-portal-log/repository";
 import { type TeamMemberType } from "../schema";
 
@@ -19,7 +19,7 @@ export const createTkdPortalLogs = ({
   student,
   member,
 }: {
-  student: StudentDetailType;
+  student: Prisma.StudentGetPayload<{ include: { parent: true } }>;
   member: TeamMemberType;
 }) => {
   const buildLog = (field: string) => ({

@@ -1,4 +1,4 @@
-import { type StudentDetailType } from "../../student";
+import { type Prisma } from "../../../generated/client";
 import { type TeamMemberType } from "../schema";
 
 /**
@@ -11,7 +11,7 @@ import { type TeamMemberType } from "../schema";
  */
 export const compareStudentAndMember = (
   member: TeamMemberType,
-  student: StudentDetailType,
+  student: Prisma.StudentGetPayload<{ include: { parent: true } }>,
 ) =>
   student.parent?.nationalId === member.nationalId ||
   (student.tkdid === student.parent?.nationalId &&

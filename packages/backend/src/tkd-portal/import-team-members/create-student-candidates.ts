@@ -1,13 +1,11 @@
+import { type Prisma } from "../../../generated/client";
 import { studentCandidateRepository } from "../../student-candidate/repository";
-import { type StudentDetailType } from "../../student/schema";
 import { tkdPortalLogRepository } from "../../tkd-portal-log/repository";
 import { type TeamMemberType } from "../schema";
 import { compareStudentAndMember } from "./utils";
 
-type AllStudents = StudentDetailType[];
-
 export const createStudentCandidates = async (
-  allStudents: AllStudents,
+  allStudents: Prisma.StudentGetPayload<{ include: { parent: true } }>[],
   portalMembers: TeamMemberType[],
 ) => {
   const allStudentCandidates = await studentCandidateRepository.findAll();

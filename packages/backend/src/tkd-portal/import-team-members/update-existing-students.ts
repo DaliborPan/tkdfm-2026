@@ -1,10 +1,10 @@
+import { type Prisma } from "../../../generated/client";
 import { studentRepository } from "../../student/repository";
-import { type studentService } from "../../student/service";
 import { type TeamMemberType } from "../schema";
 import { createTkdPortalLogs } from "./create-tkd-portal-logs";
 import { compareStudentAndMember } from "./utils";
 
-type AllStudents = Awaited<ReturnType<typeof studentService.findAll>>;
+type AllStudents = Prisma.StudentGetPayload<{ include: { parent: true } }>[];
 
 const prepareStudent = (
   student: AllStudents[number] & {

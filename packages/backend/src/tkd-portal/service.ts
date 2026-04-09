@@ -1,5 +1,5 @@
 import { type CurrentUserType } from "../auth/current-user";
-import { studentService } from "../student";
+import { studentRepository } from "../student/repository";
 import { validateTrainer } from "../utils/validation";
 import { getAccessToken } from "./access-token";
 import { createStudentCandidates } from "./import-team-members/create-student-candidates";
@@ -16,8 +16,7 @@ const importTeamMembers = async ({
   const token = await getAccessToken();
   const tkdPortalData = await getTeamMembers(token);
 
-  // TODO(backoffice) - should be working with "StudentWithParent", not StudentDetailType
-  const allStudents = await studentService.findAll();
+  const allStudents = await studentRepository.findAll();
 
   await updateExistingStudents(allStudents, tkdPortalData.items);
   await createStudentCandidates(allStudents, tkdPortalData.items);

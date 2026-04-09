@@ -1,19 +1,17 @@
-version: "3"
-
-volumes:
-  database:
-    driver: local
+version: '3.8'
 
 services:
-  db:
-    platform: linux/amd64
-    image: postgres:17 # Use a specific version of Postgres
-    restart: always
+  postgres:
+    image: postgres:16
+    container_name: my_postgres_db
     environment:
-      - POSTGRES_USER=sebi
-      - POSTGRES_PASSWORD=sebi_test_4444
-      - POSTGRES_DB=turborepo
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
     ports:
-      - "5432:5432" # Expose the Postgres port to your local machine
+      - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
