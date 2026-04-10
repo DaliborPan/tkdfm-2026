@@ -7,7 +7,8 @@
     "DATABASE_URL",
     "NEXT_PUBLIC_APP_URL",
     "TKD_PORTAL_CLIENT_ID",
-    "TKD_PORTAL_CLIENT_SECRET"
+    "TKD_PORTAL_CLIENT_SECRET",
+    "VERCEL"
   ],
   "tasks": {
     "build": {

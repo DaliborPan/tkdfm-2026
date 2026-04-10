@@ -1,11 +1,19 @@
 import { type PrimaryMenuItemType, isActive } from "iqf-web-ui/app-sidebar";
-import { Home, Layers, Logs, ShieldAlert, UserRoundPlus } from "lucide-react";
+import {
+  CalendarDays,
+  Home,
+  Layers,
+  Logs,
+  ShieldAlert,
+  UserRoundPlus,
+} from "lucide-react";
 import { useIntl } from "react-intl";
 
 import { groupConf } from "@/modules/group/conf";
 import { helpdeskTicketConf } from "@/modules/helpdesk-ticket/conf";
 import { studentCandidateConf } from "@/modules/student-candidate/conf";
 import { tkdPortalLogConf } from "@/modules/tkd-portal-log/conf";
+import { trainingConf } from "@/modules/training/conf";
 
 export function usePrimaryItems(): PrimaryMenuItemType[] {
   const intl = useIntl();
@@ -58,6 +66,18 @@ export function usePrimaryItems(): PrimaryMenuItemType[] {
       },
       align: "bottom",
       isActive: (href) => isActive([studentCandidateConf.url], href),
+    },
+    {
+      label: intl.formatMessage({
+        id: "sidebar.primary-items.training",
+        defaultMessage: "Tréninky",
+      }),
+      href: trainingConf.url,
+      icon: {
+        Icon: CalendarDays,
+      },
+      align: "bottom",
+      isActive: (href) => isActive([trainingConf.url], href),
     },
     {
       label: intl.formatMessage({

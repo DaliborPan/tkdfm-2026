@@ -10,35 +10,14 @@ import { SimpleSelectField } from "iqf-web-ui/select-field";
 import { successToast } from "iqf-web-ui/toast";
 import { Cable } from "lucide-react";
 
-import { useBrowseDataQuery } from "@repo/admin-ui/browse-data-query";
-import { groupBrowseSchema } from "@repo/backend/group/schema";
 import {
   type StudentCandidateCreateStudentType,
   studentCandidateCreateStudentSchema,
 } from "@repo/backend/student-candidate/schema";
 
-import { groupConf } from "@/modules/group/conf";
+import { useGroupOptionsWithShortcut } from "@/modules/group/hooks/api";
 
 import { studentCandidateConf } from "../conf";
-
-const useGroupOptions = () => {
-  const query = useBrowseDataQuery({
-    queryKey: [groupConf.api, "create-student-options"],
-    api: groupConf.api,
-    schema: groupBrowseSchema,
-    options: {
-      filters: [],
-      sort: [],
-      take: 100,
-      skip: 0,
-    },
-  });
-
-  return (query.data?.items ?? []).map((group) => ({
-    id: group.id,
-    title: `${group.name} (${group.shortcut})`,
-  }));
-};
 
 const useCreateStudentFromCandidateMutation = () => {
   const queryClient = useQueryClient();
@@ -85,7 +64,7 @@ export function CreateStudentFromCandidateAction({
         <SimpleSelectField
           label="Skupina, do které bude přiřazen nový student"
           name="groupId"
-          useOptions={useGroupOptions}
+          useOptions={useGroupOptionsWithShortcut}
           showClearButton={false}
         />
       }
