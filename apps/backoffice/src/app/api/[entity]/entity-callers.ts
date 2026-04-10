@@ -7,11 +7,12 @@ import {
   tkdPortalLogUpdateSchema,
 } from "@repo/backend/tkd-portal-log/schema";
 
-import { studentCandidateCaller } from "@/modules/student-candidate/server/caller";
 import { groupRegularTrainingCaller } from "@/modules/group-regular-training/server/caller";
 import { groupCaller } from "@/modules/group/server/caller";
 import { helpdeskTicketCaller } from "@/modules/helpdesk-ticket/server/caller";
+import { studentCandidateCaller } from "@/modules/student-candidate/server/caller";
 import { tkdPortalLogCaller } from "@/modules/tkd-portal-log/server/caller";
+import { trainingCaller } from "@/modules/training/server/caller";
 
 import {
   createBrowseEntityCaller,
@@ -52,6 +53,10 @@ const entityCallers: Record<string, EntityCaller> = {
       schema: studentCandidateUpdateSchema,
       caller: studentCandidateCaller,
     }),
+  },
+  training: {
+    ...createBrowseEntityCaller({ caller: trainingCaller }),
+    ...createDetailEntityCaller({ caller: trainingCaller }),
   },
   tkdPortalLog: {
     ...createBrowseEntityCaller({ caller: tkdPortalLogCaller }),

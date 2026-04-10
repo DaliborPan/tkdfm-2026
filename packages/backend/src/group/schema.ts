@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+export const groupNameSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
 export const groupBrowseSchema = z.object({
   id: z.string(),
   createdAt: z.string(),

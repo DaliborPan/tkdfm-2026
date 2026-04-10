@@ -37,6 +37,8 @@
     "./parent": "./src/parent/index.ts",
     "./group": "./src/group/index.ts",
     "./trainer": "./src/trainer/index.ts",
+    "./training/schema": "./src/training/schema.ts",
+    "./training/service": "./src/training/service.ts",
     "./training": "./src/training/index.ts",
     "./utils/browse": "./src/utils/browse.ts",
     "./widget": "./src/widget/index.ts",
