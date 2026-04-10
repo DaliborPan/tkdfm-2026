@@ -1,12 +1,23 @@
-import type { Prisma } from "../../generated/client";
+import type { Prisma, Student } from "../../generated/client";
 import { parentMapper } from "../parent/mapper";
-import { studentDetailSchema } from "./schema";
+import { studentDetailSchema, studentLabelSchema } from "./schema";
 
 type StudentWithParent = Prisma.StudentGetPayload<{
   include: { parent: true };
 }>;
 
 export const studentMapper = {
+  toStudentLabel(
+    student: Pick<Student, "id" | "firstName" | "lastName" | "technicalGrade">,
+  ) {
+    return studentLabelSchema.parse({
+      id: student.id,
+      firstName: student.firstName,
+      lastName: student.lastName,
+      technicalGrade: student.technicalGrade,
+    });
+  },
+
   toStudentDetail(student: StudentWithParent) {
     return studentDetailSchema.parse({
       id: student.id,

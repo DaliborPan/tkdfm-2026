@@ -1,4 +1,6 @@
 import type { Prisma } from "../../generated/client";
+import { attendanceMapper } from "../attendance/mapper";
+import { groupMapper } from "../group/mapper";
 import { trainingBrowseSchema, trainingDetailSchema } from "./schema";
 
 type TrainingBrowseRow = Prisma.TrainingGetPayload<{
@@ -44,7 +46,7 @@ export const trainingMapper = {
       endsAt: training.endsAt.toISOString(),
       cancelled: training.cancelled,
       regular: training.regular,
-      group: training.group,
+      group: groupMapper.toGroupName(training.group),
     });
   },
 
@@ -56,15 +58,10 @@ export const trainingMapper = {
       endsAt: training.endsAt.toISOString(),
       cancelled: training.cancelled,
       regular: training.regular,
-      group: training.group,
-      attendances: training.attendances.map((attendance) => ({
-        id: attendance.id,
-        createdAt: attendance.createdAt.toISOString(),
-        excused: attendance.excused,
-        studentId: attendance.studentId,
-        trainingId: attendance.trainingId,
-        student: attendance.student,
-      })),
+      group: groupMapper.toGroupName(training.group),
+      attendances: training.attendances.map(
+        attendanceMapper.toAttendanceDetail,
+      ),
     });
   },
 };
